@@ -39,17 +39,8 @@ public class TestServlet extends HttpServlet {
 		double operand1 = Double.parseDouble(num1);
 		double operand2 = Double.parseDouble(num2);
 		
-		double result = 0;
-		
-		if(operator.equals("+")) {
-			result = operand1 + operand2;
-		} else if (operator.equals("-")) {
-		    result = operand1 - operand2;
-		} else if (operator.equals("¡¿")) {
-		    result = operand1 * operand2;
-		} else if (operator.equals("¡À")) {
-		    result = operand1 / operand2;
-		}
+		double result = Calculator.calculate(operand1, operand2, operator);
+
 		
 		
 		PrintWriter out = response.getWriter();

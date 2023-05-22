@@ -48,6 +48,7 @@ public class CookieTestServlet2 extends HttpServlet {
 			for (Cookie cookie : cookies) {
 				//출력
 				out.println("cookie :" + cookie.getName() + ":" + cookie.getValue() + "<br/>");
+				
 			}
 		}
 		// name과 value 입력받는 html 폼 생성 //폼을 제출할때	// form태그로 할것~action은 그때 실행되는 서블릿 이름을 알려달라는 것임

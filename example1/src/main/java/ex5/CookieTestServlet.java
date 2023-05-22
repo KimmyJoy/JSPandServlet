@@ -37,6 +37,7 @@ public class CookieTestServlet extends HttpServlet {
 			//예외 처리 코드에 신경을 많이 써야함
 			//for문 안으로 들어왔다는 소리는 쿠키가 있다는 이야기
 			cnt = Integer.parseInt(cookies[i].getValue());//숫자로 변환하기 위해 integer를 사용
+			//여기서 사용되는 get쪽 메소드들은 이미 정의가 된 것임 -> 아이디만 받고 싶다 하면 cookies[i].getValue().equals("id");라고 하면 거기에 해당하는 놈들만 나오게 됨???
 			break;
 		}
 		//이전 방문횟수만 저장된 것이고 현재를 반영하기위해 아래와 같이 값을 1회 늘려줌
