@@ -15,5 +15,6 @@ application.setAttribute("id",id);//서버 단에 존재하는 java instance임 jsp도 ser
 %>
 <h1><%= id %>로 로그인 하였습니다.<br/></h1>
 <a href="./Twopage.jsp">이동</a>
+<!-- jsp에서 제공하는 것 -->
 </body>
 </html>
