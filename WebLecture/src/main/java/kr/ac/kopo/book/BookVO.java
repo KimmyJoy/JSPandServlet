@@ -18,6 +18,15 @@ public class BookVO {
 		//습관적으로 생성자는 만드는 것이 좋음
 	}
 
+	
+	public BookVO(String isbn, String title, String writer) {
+		super();
+		this.isbn = isbn;
+		this.title = title;
+		this.writer = writer;
+	}
+
+
 	public String getIsbn() {
 		return isbn;
 	}
