@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-euiv="Content-Type" content= "text/html" charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>회원가입</h1>
+<hr/>
+<!-- 만약 서로 연관성이 있는 것들이 있다면 어느정도로 연관성 있게 이름을 지어야 좋음 -->
+<form action="insertUser.do" method="post">
+	<table border="1">
+		<tr>
+			<td>아이디</td>
+			<td><input type="text" name="id"/>
+		</tr>
+		<tr>
+			<td>비밀번호</td>
+			<td><input type="password" name="password"/>
+		</tr>
+		<tr>
+			<td>이름</td>
+			<td><input type="text" name="name"/>
+		</tr>
+		<tr>
+			<td>권한</td>
+			<td><input type="radio" name="role" value="Admin" checked="checked"/>관리자
+			<td><input type="radio" name="role" value="User"/>사용자
+		</tr>
+		<tr>
+			<td colspan="2">
+			<input type="submit" value="제출"/>
+		</tr>
+	</table>
+</form>
+<br/>
+<a href="login.html">로그인</a>
+</body>
+</html>

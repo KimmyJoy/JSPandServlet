@@ -3,8 +3,8 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import controller.user.InsertUserController;
-import controller.user.LoginController;
+//import controller.user.InsertUserController;
+//import controller.user.LoginController;
 
 public class HandlerMapping {
 	
@@ -12,8 +12,8 @@ public class HandlerMapping {
 	//여기에 쓰인 Controller는 우리가 인터페이스로 만든 컨트롤러임
 	public HandlerMapping() {
 		mappings = new HashMap<String, Controller>();
-		mappings.put("/insertUser.do", new InsertUserController());
-		mappings.put("/login.do", new LoginController()); //해쉬 맵에 들어가는 key, 객체값
+//		mappings.put("/insertUser.do", new InsertUserController());
+//		mappings.put("/login.do", new LoginController()); //해쉬 맵에 들어가는 key, 객체값
 	}
 	public Controller getController(String path) {
 		return mappings.get(path);
