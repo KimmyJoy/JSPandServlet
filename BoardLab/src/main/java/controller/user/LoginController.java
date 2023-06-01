@@ -25,7 +25,8 @@ public class LoginController implements Controller {
 		if(user != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
-			return "Ok.jsp";
+			return "getBoardList.do";
+			//위처럼 .do로 기재하면 로그인에서 로그인이 되면 controller에게 getBoardList라는 명령을 주는 것이 되고 GetBoardList.jsp를 실행하게 됨
 		} else {
 			return "login.html";
 		}

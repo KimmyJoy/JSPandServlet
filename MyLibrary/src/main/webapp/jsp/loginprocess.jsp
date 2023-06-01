@@ -1,4 +1,4 @@
-<%@page import="kr.ac.kopo.member.MemberVO"%>
+<%@page import="biz.user.UserVO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -85,14 +85,14 @@
 		String locUrl = "";
 		if(rs.next()) {
 			
-			MemberVO loginUser = new MemberVO();
+			UserVO loginUser = new UserVO();
 			loginUser.setId(rs.getString("id"));
 			loginUser.setPassword(rs.getString("password"));
 			loginUser.setName(rs.getString("name"));
-			loginUser.setType(rs.getString("type"));
+			loginUser.setRole(rs.getString("role"));
 			
 			msg = loginUser.getName() + "님 환영합니다";
-			locUrl = "/WebTest";
+			locUrl = "/MyLibrary";
 			
 			session.setAttribute("loginUser", loginUser);
 			

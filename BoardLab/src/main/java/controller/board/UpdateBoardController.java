@@ -6,26 +6,30 @@ import javax.servlet.http.HttpServletResponse;
 import biz.board.BoardDAO;
 import biz.board.BoardVO;
 import controller.Controller;
-
-public class InsertBoardController implements Controller {
+//객체 지향 사고를 키우는 것이 중요. 이게 잘되면 반복 작업이 는다
+public class UpdateBoardController implements Controller {
 
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		
 		String title = request.getParameter("title");
-		String writer = request.getParameter("writer");
+		String seq = request.getParameter("seq");
 		String content = request.getParameter("content");
+		String hit = request.getParameter("hit");
 		
 		BoardVO vo = new BoardVO();
 		vo.setTitle(title);
-		vo.setWriter(writer);
 		vo.setContent(content);
+		vo.setSeq(Integer.parseInt(seq));
+		vo.setHit(Integer.parseInt(hit));
+		
 		
 		BoardDAO dao = new BoardDAO();
-		dao.insertBoard(vo);
+		dao.updateBoard(vo);
 		
-		// -> 요 줄까지는 내가 했던거랑 똑같았음...
-		//로그인 하고 간 곳에서 게시판 리스트를 만들 예정임
-		return "getBoardList.do";
+//		request.setAttribute("board", dao);
+		
+		return "getBoardList.do";//수정하고 리스트 화면으로 넘어갈 수 있게 하는 것)
 	}
 
 }

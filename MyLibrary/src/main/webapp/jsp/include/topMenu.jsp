@@ -21,11 +21,11 @@
 			<c:choose>
 			 <c:when test="${ empty loginUser }">
 			회원가입 | 
-			<a href="/WebTest/jsp/login.jsp">로그인</a>
+			<a href="/MyLibrary/jsp/login.jsp">로그인</a>
 			</c:when>
 			<c:otherwise>
 			마이페이지 |
-				<a href="/WebTest/jsp/logout.jsp">로그아웃</a>
+				<a href="/MyLibrary/jsp/logout.jsp">로그아웃</a>
 			</c:otherwise>
 			</c:choose>
 		</td>
