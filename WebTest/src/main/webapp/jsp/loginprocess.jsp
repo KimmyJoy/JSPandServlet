@@ -13,7 +13,7 @@
 	3. 검색 결과에 따른 화면을 구성
 */
 
-	request.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("UTF-8");
 //인코딩 순서는 반드시 첫번째로 위치해야함
 	String id = request.getParameter("id");
 	String password = request.getParameter("password");

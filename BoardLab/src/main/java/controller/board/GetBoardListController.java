@@ -17,7 +17,6 @@ public class GetBoardListController implements Controller {
 		 BoardVO vo = new BoardVO();
 		 BoardDAO dao = new BoardDAO();
 		 List<BoardVO> boardList = dao.getBoardList(vo);
-		 
 		 request.setAttribute("boardList", boardList);
 		 //view 한테 넘겨줘야 함
 		//소프트웨어의 결합도와 응집도는....결합도는 낮추고 응집도는 올려야하는데 만약 이처럼 직접 부르면(결합시키면) 좋지 않음

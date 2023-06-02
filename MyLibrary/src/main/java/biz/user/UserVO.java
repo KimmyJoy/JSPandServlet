@@ -21,6 +21,13 @@ public class UserVO {
 			this.id = id;
 		}	
 		
+		
+		public UserVO(String id, String password) {
+			super();
+			this.id = id;
+			this.password = password;
+		}
+
 		public UserVO(String id, String password, String name, String phonenum, String email, String role) {
 			super();
 //			this.seq = seq;

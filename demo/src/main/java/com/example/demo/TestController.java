@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+//어노테이션만 적으면 끝남 이런식으로 하면 편함?
 public class TestController {
 	@RequestMapping("/abc")
 	public String test(Model model) {

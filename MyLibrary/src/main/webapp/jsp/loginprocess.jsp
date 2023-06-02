@@ -29,7 +29,7 @@
 	
 	StringBuilder sql = new StringBuilder();
 			sql.append("select * ");
-			sql.append(" from t_member ");
+			sql.append(" from t_user ");
 			sql.append(" where id = ? and password = ? ");
 			
 	/* try(		
@@ -89,6 +89,8 @@
 			loginUser.setId(rs.getString("id"));
 			loginUser.setPassword(rs.getString("password"));
 			loginUser.setName(rs.getString("name"));
+			loginUser.setPhonenum(rs.getString("phonenum"));
+			loginUser.setEmail(rs.getString("email"));
 			loginUser.setRole(rs.getString("role"));
 			
 			msg = loginUser.getName() + "님 환영합니다";

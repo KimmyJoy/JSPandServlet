@@ -23,9 +23,9 @@
 		return false//submit 버튼 눌렀을때
 		*/
 		
-		let f = documet.loginForm;
+		let f = document.loginForm;
 		let id = f.id;
-		let id = f.password;
+		let password = f.password;
 		
 		if(f.id.value == '') {
 			alert('ID를 입력하세요')
@@ -46,7 +46,7 @@
 		<jsp:include page="/jsp/include/topMenu.jsp" />
 	</header>
 	<section>
-		<div align="center">
+		<div align="right">
 		<br>
 		<h2>로그인</h2>
 		<br>

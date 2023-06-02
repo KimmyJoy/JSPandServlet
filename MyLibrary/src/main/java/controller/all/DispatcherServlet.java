@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class DispathcerServlet
  */
+//.do에 대한 요청을 받는 애(콜센터 대표번호 같은 애) => hadler에 넘겨주고 handler는 시킨다
 //모든걸 다 처리하기 위해서는 어노테이션을 지워야 함
 public class DispatcherServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -38,9 +39,9 @@ public class DispatcherServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	//어디로 들어오든 단 process로 처리 할 예정
+	//어디로 들어오든 다 process로 처리 할 예정
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("EUC-KR");
+		request.setCharacterEncoding("UTF-8");
 		process(request, response);
 		//서블릿에서 들어오는 url에서 uri를 뽑아내고 명령어를 처리하고 html이나 jsp로 보여줌 클래스한테 명령어를 줘야함???
 		//
@@ -48,15 +49,22 @@ public class DispatcherServlet extends HttpServlet {
 
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//uri 추출
+		try {
 		String uri = request.getRequestURI();
-		String path = uri.substring(uri.lastIndexOf("/"));
+		System.out.println("uri : " + uri);
+//		String path = uri.substring(uri.lastIndexOf("/"));//얘처럼 하면 /WebText/login.do 이 부분이 다 들어가버림 중복이 되면...
+		String path = uri.substring(request.getContextPath().length());
 		//역슬래쉬 뒤에 나오는 것이 추출됨
 		
 		Controller ctrl = mapping.getController(path);
 		String viewPage = ctrl.handleRequest(request, response);
 		
+		if(viewPage != null) {
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
 		rd.forward(request, response);
-		
+		}
+		} catch (Exception e) {
+			throw new IOException(e);
+		}
 	}
 }

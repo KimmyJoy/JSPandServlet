@@ -65,3 +65,23 @@ values('aaa', '1234', '홍길동');
 commit;
 
 select * from t_member;
+
+
+create table t_user(
+       id varchar2(100) primary key,
+       password varchar2(200) not null,
+       name varchar2(100),
+       phonenum varchar2(200),
+       email varchar2(200),
+       role char(1) default 'U'
+);
+
+select * from t_user;
+
+drop table t_user;
+
+insert into t_user(id, password, name, phonenum, email, role)
+values('admin', 'admin', '관리자', '010-1111-2222', 'ige@kopo.ac.kr', 'S');
+
+insert into t_user(id, password, name, phonenum, email)
+values('bbb', '2345', '길길동', '010-3333-4444', 'moyo@kopo.ac.kr');

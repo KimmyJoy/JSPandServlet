@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 //import controller.user.InsertUserController;
-//import controller.user.LoginController;
+import controller.user2.LoginController;
+import controller.user2.LoginProcessController;
 
 public class HandlerMapping {
 	
@@ -13,7 +14,9 @@ public class HandlerMapping {
 	public HandlerMapping() {
 		mappings = new HashMap<String, Controller>();
 //		mappings.put("/insertUser.do", new InsertUserController());
-//		mappings.put("/login.do", new LoginController()); //해쉬 맵에 들어가는 key, 객체값
+		mappings.put("/login.do", new LoginController()); //해쉬 맵에 들어가는 key, 객체값
+		mappings.put("/loginprocess.do", new LoginProcessController());
+		System.out.println("지금 이게 되고 있나요?");
 	}
 	public Controller getController(String path) {
 		return mappings.get(path);
