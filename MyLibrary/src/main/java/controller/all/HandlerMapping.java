@@ -3,9 +3,12 @@ package controller.all;
 import java.util.HashMap;
 import java.util.Map;
 
+import controller.admin.AdminpageController;
 //import controller.user.InsertUserController;
 import controller.user2.LoginController;
 import controller.user2.LoginProcessController;
+import controller.user2.LogoutController;
+import controller.user2.MypageController;
 
 public class HandlerMapping {
 	
@@ -15,7 +18,11 @@ public class HandlerMapping {
 		mappings = new HashMap<String, Controller>();
 //		mappings.put("/insertUser.do", new InsertUserController());
 		mappings.put("/login.do", new LoginController()); //해쉬 맵에 들어가는 key, 객체값
+		mappings.put("/logout.do", new LogoutController()); //해쉬 맵에 들어가는 key, 객체값
+		mappings.put("/main.do", new GotomainController());
 		mappings.put("/loginprocess.do", new LoginProcessController());
+		mappings.put("/adminpage.do", new AdminpageController());
+		mappings.put("/Mypage.do", new MypageController());
 		System.out.println("지금 이게 되고 있나요?");
 	}
 	public Controller getController(String path) {

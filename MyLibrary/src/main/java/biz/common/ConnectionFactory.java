@@ -9,7 +9,7 @@ public class ConnectionFactory {
 	public Connection getConnection() throws Exception { //이렇게 해도 됨
 		
 		Connection conn = null;
-		
+		System.out.println("내가 돌아가고 있나요?");
 //		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";

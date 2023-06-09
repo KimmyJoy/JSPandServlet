@@ -1,4 +1,4 @@
-<%@page import="biz.user.UserVO"%>
+<%@page import="biz.user.lib.UserVO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -32,45 +32,6 @@
 			sql.append(" from t_user ");
 			sql.append(" where id = ? and password = ? ");
 			
-	/* try(		
-	Connection conn = DriverManager.getConnection(url, user, pass);
-	PreparedStatement pstmt = conn.prepareStatement(sql.toString());
-	) {
-		
-		pstmt.setString(1, id);
-		pstmt.setString(2, password);
-		
-		ResultSet rs = pstmt.executeQuery();
-		//결과가 최대 1개 최소 0개가 나올 것(매칭된건 1개, 안된건 0개) 그래서 이걸 true false화 가능
-		// = new MemberVO();
-		
-		String msg = "";
-		String locUrl = "";
-		if(rs.next()) {
-			//로그인 성공시
-			MemberVO loginUser = new MemberVO();
-			loginUser.setId(rs.getString("id"));
-			loginUser.setPassword(rs.getString("password"));
-			loginUser.setName(rs.getString("name"));
-			loginUser.setType(rs.getString("type"));
-			
-			msg = loginUser.getName() + "님 환영합니다";
-			locUrl = "/WebTest"; //잘되면 메인페이지에
-			//공유 영역에 등록시켜야함 session에
-			session.setAttribute("loginUser", loginUser);
-		} else {
-			msg = "입력하신 ID 또는 패스워드가 잘못되었습니다";
-			locUrl = "login.jsp";//입력이 잘못되면 다시 로그인 페이지로 보내고 싶은 것
-		}
-		
-		pageContext.setAttribute("msg", msg);
-		pageContext.setAttribute("url", locUrl);
-		//출력메시지와 보내야하는 url을 함께 묶어서 한 것
-		
-	} catch(Exception e) {
-		e.printStackTrace();
-	} */
-	
 	try(
 		Connection conn = DriverManager.getConnection(url, user, pass);
 		PreparedStatement pstmt = conn.prepareStatement(sql.toString());
@@ -100,7 +61,7 @@
 			
 		} else {
 			msg = "입력하신 ID 또는 패스워드가 잘못되었습니다";
-			locUrl = "login.jsp";
+			locUrl = "login.do";
 		}
 		
 		pageContext.setAttribute("msg", msg);

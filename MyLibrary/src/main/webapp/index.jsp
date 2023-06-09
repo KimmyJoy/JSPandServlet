@@ -14,6 +14,7 @@
 <body>
 <header>
 <jsp:include page="/jsp/include/topMenu.jsp"/>
+<jsp:include page="/jsp/include/searchbar.jsp"/>
 </header>
 <section id="main">
 메인페이지입니다

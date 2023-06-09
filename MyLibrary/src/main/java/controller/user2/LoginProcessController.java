@@ -2,10 +2,10 @@ package controller.user2;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import biz.user.UserDAO;
-import biz.user.UserVO;
+import javax.servlet.http.HttpSession;
 import controller.all.Controller;
+import biz.user.lib.UserDAO;
+import biz.user.lib.UserVO;
 
 public class LoginProcessController implements Controller {
 
@@ -15,26 +15,26 @@ public class LoginProcessController implements Controller {
 
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
-		UserVO login = new UserVO(id, password);
+		
+		System.out.println("id : " + id + ", password : "+password);
 
+		UserVO vo = new UserVO();
+		vo.setId(id);
+		vo.setPassword(password);
+		
 		UserDAO dao = new UserDAO();
-		UserVO user = dao.login(login);
-
-		String msg = "";
-		String url = "";
-		if (user != null) {
-			request.setAttribute("loginUser", user);
-			msg = "로그인 성공";
-			url = "/MyLibrary/main.do";
+		UserVO user = null;
+		//유효성 검사 필요
+		if (dao.isEqauls(id, password)) {
+			user = dao.getuserByid(id);
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", user);
+			System.out.println("나 되고 있니?");
+			return "main.do";
 		} else {
-			msg = "아이디 또는 패스워드가 잘못되었습니다";
-			url = "/MyLibrary/login.do";
+			System.out.println("응!");
+			return "login.do";
 		}
-
-		request.setAttribute("msg", msg);
-		request.setAttribute("url", url);
-
-		return "/jsp/login/loginprocess.jsp";
 	}
-
 }
