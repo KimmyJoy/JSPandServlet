@@ -7,19 +7,19 @@
 <div class="sidebar">
   <ul class="nav flex-column">
     <li class="nav-item">
-      <a class="nav-link" href="#">도서반납</a>
+      <a class="nav-link" href="javascript:void(0)" onclick="loadPage('book_return')">도서반납</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">내가 쓴 글 조회</a>
+      <a class="nav-link" href="javascript:void(0)" onclick="loadPage('my_board')">내가 쓴 글 조회</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">정보 수정</a>
+      <a class="nav-link" href="javascript:void(0)" onclick="loadPage('changeinfo')">정보 수정</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">문의 하기</a>
+      <a class="nav-link" href="javascript:void(0)" onclick="loadPage('getservice')">문의 하기</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">회원 탈퇴</a>
+      <a class="nav-link" href="javascript:void(0)" onclick="loadPage('byebye')">회원 탈퇴</a>
     </li>
   </ul>
 </div>

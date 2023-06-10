@@ -10,7 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 <script>
 function loadPage(pageName) {
-  $("#content").load("/MyLibrary/jsp/user/admin_view.jsp #" + pageName);
+  $("#content").load("/MyLibrary/jsp/include/admin_view.jsp #" + pageName);
 }
 </script>
     <meta charset="UTF-8">
@@ -59,7 +59,6 @@ function loadPage(pageName) {
 <body>
 <header>
   <jsp:include page="/jsp/include/topMenu.jsp"/>
-  <jsp:include page="/jsp/include/searchbar.jsp"/>
 </header>
 <div class="container">
   <aside class="col-md-3 sidebar">

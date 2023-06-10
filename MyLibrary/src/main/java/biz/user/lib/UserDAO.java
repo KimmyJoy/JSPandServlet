@@ -17,16 +17,20 @@ public class UserDAO {
 //	private static final String USER_GET =
 //			"SELECT * FROM users WHERE id=? AND password=?";
 	
-	StringBuilder sql = new StringBuilder();
 	public void insertUser(UserVO users) {// t_user로...하면 되는 것...
 
 		// boardList.add(board); DB용으로 필요 없어짐 쿼리가 필요해짐 1.7버전의 try 캐치문을 쓸예정임
-		sql.append("insert into t_users(no, id, password, name, phonenum, email, role) "); // no는 nextval로 이루어져있고 trigger처리 하여 넣지 않아도 됨
-		sql.append(" values(seq_t_users_no.nextval, ?, ?, ?, ?, ?, ?) ");// 내용이 어떻게 적힐지 모르는 변수는 ?임 이야아아앙... 이변수값은 board
+		StringBuilder sql = new StringBuilder();
+		sql.append("insert into t_users(id, password, name, phonenum, email, role) "); // no는 nextval로 이루어져있고 trigger처리 하여 넣지 않아도 됨
+		sql.append(" values(?, ?, ?, ?, ?, ?) ");// 내용이 어떻게 적힐지 모르는 변수는 ?임 이야아아앙... 이변수값은 board
 																		// 변수가 알고 있음
 
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+			String role = users.getRole();
+			if (role == null) {
+				role = "U";
+			}
 			pstmt.setString(1, users.getId());
 			pstmt.setString(2, users.getPassword());
 			pstmt.setString(3, users.getName());
@@ -44,6 +48,7 @@ public class UserDAO {
 	public UserVO getUser(UserVO vo) {
 		UserVO user = null;
 		
+		StringBuilder sql = new StringBuilder();
 		sql.append("select* from t_users where id = ? and password = ?");
 		
 		try (Connection conn = new ConnectionFactory().getConnection();
@@ -71,14 +76,15 @@ public class UserDAO {
 	public UserVO getuserByid(String iD) {// 특정 아이디 검색이 가능한 쿼리실행
 
 		UserVO user = null;
-
+		StringBuilder sql = new StringBuilder();
 		sql.append("select id, password, name, phonenum, email, role ");
 		sql.append(" from t_users ");
-		sql.append(" where id = ? ");
+		sql.append(" where id= ? ");
 
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
 
+			System.out.println(iD);
 			pstmt.setString(1, iD);
 
 			ResultSet rs = pstmt.executeQuery();// 최대 한줄이라 while(rs.next())가 필요 없을 것
@@ -104,6 +110,7 @@ public class UserDAO {
 				
 //				MemberVO mem = null;
 				
+				StringBuilder sql = new StringBuilder();
 				sql.append("SELECT INSTR(ID, ?), ID FROM t_users ");
 				
 				try(
@@ -132,6 +139,7 @@ public class UserDAO {
 	//0. 로그인2단계-ID&PW 둘다일치 확인하는 메소드.
 			public boolean isEqauls(String id, String password) {
 				
+				StringBuilder sql = new StringBuilder();
 				sql.append("SELECT * FROM t_users WHERE ID = ? AND PASSWORD = ? ");
 				
 				try(
@@ -162,6 +170,7 @@ public class UserDAO {
 		List<UserVO> userList = new ArrayList<>();// 보드 vo를 감싸안아줄 list가 필요함
 
 		// String sql = "select * from t_board";//연월일시분초가 다 ㄴ나오므로 이게 아니고 다른 형태로 해야 함
+		StringBuilder sql = new StringBuilder();
 		sql.append("select id, password, name, phonenum, email, role ");
 		sql.append(" from t_users ");
 		sql.append(" order by no desc ");// 가장최근순으로 하기 위해
@@ -203,6 +212,7 @@ public class UserDAO {
 	
 	public void deleteUser(String id) {
 
+		StringBuilder sql = new StringBuilder();
 		sql.append("delete ");// instr 때문에 전부 입력받아야함....그리고 애초에 등록이라 다 입력해야함!!
 		sql.append(" from t_users ");
 		sql.append(" where id = ? ");

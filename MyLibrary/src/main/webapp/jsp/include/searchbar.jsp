@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div class="search-bar">
-    <form class="d-flex align-items-center" action="search.do" method="get">
+    <form class="d-flex align-items-center" action="searchbook.do" method="get">
         <div class="input-group">
             <select class="form-select" name="searchType">
                 <option value="all">통합검색</option>

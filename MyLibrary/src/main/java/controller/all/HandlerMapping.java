@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import controller.admin.AdminpageController;
+import controller.user2.InsertUserController;
+import controller.user2.InsertUserProcessController;
 //import controller.user.InsertUserController;
 import controller.user2.LoginController;
 import controller.user2.LoginProcessController;
@@ -23,6 +25,9 @@ public class HandlerMapping {
 		mappings.put("/loginprocess.do", new LoginProcessController());
 		mappings.put("/adminpage.do", new AdminpageController());
 		mappings.put("/Mypage.do", new MypageController());
+		mappings.put("/insertuser.do", new InsertUserController());
+		mappings.put("/insertuserprocess.do", new InsertUserProcessController());
+		mappings.put("/searchbook.do", new SearchBookController());
 		System.out.println("지금 이게 되고 있나요?");
 	}
 	public Controller getController(String path) {

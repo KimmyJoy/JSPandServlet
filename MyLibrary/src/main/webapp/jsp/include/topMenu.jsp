@@ -59,7 +59,7 @@
                     <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='logout.do'">로그아웃</button>
                 </c:when>
                 <c:otherwise>
-                  <button type="button" class="btn btn-primary me-2">회원 가입</button>
+                  <button type="button" class="btn btn-primary me-2" onclick="location.href='insertuser.do'">회원 가입</button>
           		  <button type="button" class="btn btn-outline-primary" onclick="location.href='login.do'">로그인</button>
                 </c:otherwise>
             </c:choose>

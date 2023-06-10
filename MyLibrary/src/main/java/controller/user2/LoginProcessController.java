@@ -32,9 +32,22 @@ public class LoginProcessController implements Controller {
 			session.setAttribute("loginUser", user);
 			System.out.println("나 되고 있니?");
 			return "main.do";
+		} else if(dao.isDuplicatedId(id)){
+			//아이디는 존재, 비밀번호가 틀린 경우.
+			if(!dao.isEqauls(id, password)) {
+				HttpSession session = request.getSession();
+				session = request.getSession();
+				session.setAttribute("loginFeedback", "비밀번호가 일치하지 않아요");
+				System.out.println("재로그인. by LoginController");
+				return "login.do";
+			}
 		} else {
-			System.out.println("응!");
-			return "login.do";
+			//아이디없고, 비번도 안맞겠지...
+			HttpSession session = request.getSession();
+			session = request.getSession();
+			session.setAttribute("loginFeedback", "일치하는 회원이 없어요");
+			System.out.println("재로그인. by LoginController");
 		}
+		return "login.do";
 	}
-}
+	}
