@@ -5,6 +5,15 @@
   <!-- 도서 관리 페이지 내용 -->
   <h2>도서 관리 페이지</h2>
   <jsp:include page="/jsp/include/searchbar.jsp"/>
+  <div class="btn-group">
+    <button type="button" class="btn btn-success" data-toggle="modal"
+        data-target="#addNewBook" aria-expanded="false">신규도서 등록</button>
+</div>
+<div class="btn-group">
+    <button type="button" class="btn btn-success" data-toggle="modal"
+        data-target="#deleteBook" aria-expanded="false">삭제</button>
+</div>
+  <jsp:include page="/jsp/include/booklist.jsp"/>
 </div>
 
 <!-- 게시판 관리 페이지 -->

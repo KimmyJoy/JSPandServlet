@@ -1,17 +1,20 @@
 package biz.rental;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class RentalVO {
 
 	private int no;
 	private String id;
 	private String isbn;
 	private String title;
-	private String rentdate;
-	private String returndate;
+	private Date rentdate;
+	private Date duedate;
 //	private String renewdate;
 //	private String overdewdate;
 //	private String latefee;
-	private int daeyeo;
+//	private int is_rented;
 	
 
 	public RentalVO() {
@@ -21,15 +24,14 @@ public class RentalVO {
 
 	
 	
-	public RentalVO(int no, String id, String isbn, String title, String rentdate, String returndate, int daeyeo) {
+	public RentalVO(int no, String id, String isbn, String title, Date rentdate, Date duedate) {
 		super();
 		this.no = no;
 		this.id = id;
 		this.isbn = isbn;
 		this.title = title;
 		this.rentdate = rentdate;
-		this.returndate = returndate;
-		this.daeyeo = daeyeo;
+		this.duedate = duedate;
 	}
 
 
@@ -66,36 +68,36 @@ public class RentalVO {
 		this.title = title;
 	}
 
-	public String getRentdate() {
+	public Date getRentdate() {
 		return rentdate;
 	}
 
-	public void setRentdate(String rentdate) {
+	public void setRentdate(Date rentdate) {
 		this.rentdate = rentdate;
 	}
 
-	public String getReturndate() {
-		return returndate;
+	public Date getDuedate() {
+		return duedate;
 	}
 
-	public void setReturndate(String returndate) {
-		this.returndate = returndate;
+	public void setDuedate(Date duedate) {
+		this.duedate = duedate;
 	}
 	
-	public int getDaeyeo() {
-		return daeyeo;
-	}
-
-	public void setDaeyeo(int daeyeo) {
-		this.daeyeo = daeyeo;
-	}
+//	public int getDaeyeo() {
+//		return daeyeo;
+//	}
+//
+//	public void setDaeyeo(int daeyeo) {
+//		this.daeyeo = daeyeo;
+//	}
 
 
 
 	@Override
 	public String toString() {
 		return "RentalVO [no=" + no + ", id=" + id + ", isbn=" + isbn + ", title=" + title + ", rentdate=" + rentdate
-				+ ", returndate=" + returndate + ", daeyeo=" + daeyeo + "]";
+				+ ", duedate=" + duedate + "]";
 	}
 
 }

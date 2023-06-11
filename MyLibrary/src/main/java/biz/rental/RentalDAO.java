@@ -5,13 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.util.Date;
 import biz.common.ConnectionFactory;
 
 public class RentalDAO {
 
 	public void returnBook(RentalVO rent) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("delete from Rental where id = ? and isbn = ? ");
+		sql.append("delete from T_Rent WHERE UserID = ? AND BookISBN = ? ");
 
 		int cnt = 0;
 		try (Connection conn = new ConnectionFactory().getConnection();
@@ -26,23 +28,23 @@ public class RentalDAO {
 			e.printStackTrace();
 		}
 		if(cnt != 0) {
-			updateDeayeo(rent.getIsbn(), 1);
+			updateIs_rented(rent.getIsbn(), 1);
 		}
 	}
 
 	
-	// 대여시 북테이블 daeyeo 업데이트 메소드
-	public void updateDeayeo(String isbn, int a) {
+	// 대여시 북테이블의 대여 여부 업데이트 메소드
+	public void updateIs_rented(String isbn, int a) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("update t_book set is_rented = ? where isbn = ?");
+		sql.append("UPDATE T_Book SET is_rented = ? WHERE BookISBN = ?");
 
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
 			
 			pstmt.setInt(1, a);
 			pstmt.setString(2, isbn);
-
-			int cnt = pstmt.executeUpdate();// 종료하는건 쓸필요 없음...자동종료 메소드를 호출하니까
+//			int cnt = 
+			pstmt.executeUpdate();// 종료하는건 쓸필요 없음...자동종료 메소드를 호출하니까
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -50,10 +52,9 @@ public class RentalDAO {
 	
 	public void insertRent(RentalVO rent) {
 
-		// boardList.add(board); DB용으로 필요 없어짐 쿼리가 필요해짐 1.7버전의 try 캐치문을 쓸예정임
 		StringBuilder sql = new StringBuilder();
-		sql.append("insert into Rental(no, id, isbn, title) ");
-		sql.append(" values(seq_Rental_no.nextval, ?, ?, ?) ");
+		sql.append("INSERT INTO T_Rent(RentID, UserID, BookISBN, Title, RentalDate, ReturnDate) ");
+		sql.append("VALUES(seq_RentID.nextval, ?, ?, ?, SYSDATE, SYSDATE + INTERVAL '14' DAY) ");
 
 		int cnt = 0;
 		try (Connection conn = new ConnectionFactory().getConnection();
@@ -69,7 +70,7 @@ public class RentalDAO {
 		}
 		
 		if(cnt != 0) {
-			updateDeayeo(rent.getIsbn(), 0);
+			updateIs_rented(rent.getIsbn(), 0);
 		}
 	}
 
@@ -79,9 +80,9 @@ public class RentalDAO {
 
 		// String sql = "select * from t_board";//연월일시분초가 다 나오므로 이게 아니고 다른 형태로 해야 함
 		StringBuilder sql = new StringBuilder();
-		sql.append("select no, isbn, id, to_char(rentdate, 'yyyy-mm-dd') as rentdate, to_char(returndate, 'yyyy-mm-dd') as returndate, title, daeyo ");
-		sql.append(" from rental ");
-		sql.append(" order by rentdate desc ");// 가장최근순으로 하기 위해
+		 sql.append("SELECT RentID, UserID, BookISBN, Title, RentalDate, ReturnDate ");
+		    sql.append("FROM T_Rent ");
+		    sql.append("ORDER BY RentalDate DESC");
 
 		try (
 				// 1. 접속개체를 얻어와야 함
@@ -92,15 +93,14 @@ public class RentalDAO {
 			ResultSet rs = pstmt.executeQuery();// 리턴타입이 rsultset임
 
 			while (rs.next()) {
-				int no = rs.getInt("no");
-				String isbn = rs.getString("isbn");// 넘버 컬럼에 있는 int를 가져오면 됨 각각의 컬럼형태로 만들어야함
-				String id = rs.getString("id");
-				String rentdate = rs.getString("rentdate");
-				String returndate = rs.getString("returndate");
-				int daeyeo = rs.getInt("daeyo");
-				String title = rs.getString("title");
+				 int rentID = rs.getInt("RentID");
+		            String userID = rs.getString("UserID");
+		            String bookISBN = rs.getString("BookISBN");
+		            String title = rs.getString("Title");
+		            Date rentalDate = rs.getDate("RentalDate");
+		            Date duedate = rs.getDate("duedate");
 
-				RentalVO rent = new RentalVO(no, id, isbn, title, rentdate, returndate, daeyeo);// 매개변수가진걸 boardvo에 만들어뒀었으므로....가져오면 됨
+				RentalVO rent = new RentalVO(rentID, userID, bookISBN, title, rentalDate, duedate);// 매개변수가진걸 boardvo에 만들어뒀었으므로....가져오면 됨
 				/*
 				 * 위가 싫으면 이렇게 하면 됨 BookVO board = new BookVO board.setNO(no);
 				 * board.setTitle(title); board.setwriter(writer); board.setregDate(regDate);
@@ -123,9 +123,8 @@ public class RentalDAO {
 
 		// String sql = "select * from t_board";//연월일시분초가 다 나오므로 이게 아니고 다른 형태로 해야 함
 		StringBuilder sql = new StringBuilder();
-		sql.append("select no, isbn, id, to_char(rentdate, 'yyyy-mm-dd') as rentdate, to_char(returndate, 'yyyy-mm-dd') as returndate, title ");
-		sql.append(" from rental ");
-		sql.append(" where id = ? ");// 가장최근순으로 하기 위해
+		sql.append("SELECT * FROM rent_table WHERE user_id = ? ");
+		// 가장최근순으로 하기 위해
 
 		try (
 				// 1. 접속개체를 얻어와야 함
@@ -142,10 +141,10 @@ public class RentalDAO {
 				String isbn = rs.getString("isbn");// 넘버 컬럼에 있는 int를 가져오면 됨 각각의 컬럼형태로 만들어야함
 				String id = rs.getString("id");
 				String title = rs.getString("title");
-				String rentdate = rs.getString("rentdate");
-				String returndate = rs.getString("returndate");
-				int daeyeo = rs.getInt("daeyo");
-				RentalVO rent = new RentalVO(no, id, isbn, title, rentdate, returndate, daeyeo);// 매개변수가진걸 boardvo에 만들어뒀었으므로....가져오면 됨
+				Date rentDate = rs.getDate("rentdate");
+				Date dueDate = rs.getDate("duedate");
+				
+				RentalVO rent = new RentalVO(no, id, isbn, title, rentDate, dueDate);// 매개변수가진걸 boardvo에 만들어뒀었으므로....가져오면 됨
 				/*
 				 * 위가 싫으면 이렇게 하면 됨 BookVO board = new BookVO board.setNO(no);
 				 * board.setTitle(title); board.setwriter(writer); board.setregDate(regDate);
