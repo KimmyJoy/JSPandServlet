@@ -17,6 +17,7 @@
 <jsp:include page="/jsp/include/searchbar.jsp"/>
 </header>
 <section id="main">
+<div id="booklist-container"></div>
 메인페이지입니다
 </section>
 <section>

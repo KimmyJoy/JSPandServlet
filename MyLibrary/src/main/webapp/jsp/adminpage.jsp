@@ -64,7 +64,7 @@ function loadPage(pageName) {
   <aside class="col-md-3 sidebar">
     <jsp:include page="/jsp/include/sidebar_admin.jsp" />
   </aside>
-  <div id="content" class="col-9">
+  <div id="content" class="col-9 page">
     <!-- 로드될 페이지 내용 -->
   </div>
 </div>

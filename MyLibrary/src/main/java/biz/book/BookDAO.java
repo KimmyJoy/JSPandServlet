@@ -39,7 +39,7 @@ public class BookDAO {
 
 		// String sql = "select * from t_board";//연월일시분초가 다 나오므로 이게 아니고 다른 형태로 해야 함
 		StringBuilder sql = new StringBuilder();
-		sql.append("select no, isbn, title, writer, publisher, is_rented ");
+		sql.append("select * ");
 		sql.append(" from t_book ");
 		sql.append(" order by title desc ");// 도서명 순으로 정령
 
@@ -75,15 +75,50 @@ public class BookDAO {
 
 		return bookList; // 보드 vo를 감싸안을 애를 만들고 리턴해줘야함...
 	}
+	
+	// 통합검색
+		public List<BookVO> searchallBook(String str) {
+			List<BookVO> bookList = new ArrayList<>();
+			
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT INSTR((isbn || TITLE || writer || PUBLISHER), ?) AS SEARCH_BOOK, ");
+			sql.append("no, isbn, TITLE, writer, PUBLISHER, is_rented FROM t_book ");
+			sql.append("WHERE INSTR((isbn || TITLE || writer || PUBLISHER), ?) != 0 ");
+			sql.append("ORDER BY title ");
+			
+			try (Connection conn = new ConnectionFactory().getConnection();
+					PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+				pstmt.setString(1, str);
+				pstmt.setString(2, str);
+//				System.out.println("sql 잘 들어왔니? " + sql);
+				ResultSet rs = pstmt.executeQuery();
+				
+				while (rs.next()) {
+					int no = rs.getInt("no");
+					String isbn = rs.getString("isbn");
+					String title = rs.getString("title");
+					String writer = rs.getString("writer");
+					String publisher = rs.getString("publisher");
+					int is_rented = rs.getInt("is_rented");
+					
+					BookVO book = new BookVO(no, isbn, title, writer, publisher, is_rented);
+					bookList.add(book);
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return bookList;
+		}
+	
 
-	public BookVO selectByIsbn(String isbnno) {// isbn으로 조회
-
-		BookVO book = null;
+	public List<BookVO> selectByIsbn(String isbnno) {// isbn으로 조회
+		 List<BookVO> bookList = new ArrayList<>();
 
 		StringBuilder sql = new StringBuilder();
 		sql.append("select no, isbn, title, writer, publisher, is_rented ");
 		sql.append(" from t_book ");
-		sql.append(" where isbn = ? ");
+		sql.append(" where INSTR(isbn, ?) > 0 ");
 
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
@@ -101,24 +136,25 @@ public class BookDAO {
 				String publisher = rs.getString("publisher");
 				int is_rented = rs.getInt("is_rented");
 
-				book = new BookVO(no, isbn, title, writer, publisher, is_rented);
-
+				 BookVO book = new BookVO(no, isbn, title, writer, publisher, is_rented);
+				 bookList.add(book);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return book;// if를 만족하지 않으면 null값일 것
+		return bookList;// if를 만족하지 않으면 null값일 것
 	}
 
-	public BookVO selectByTitle(String titlef) {// 도서 검색용
+	public List<BookVO> selectByTitle(String titlef) {// 도서 검색용
 
 		BookVO book = null;
+		List<BookVO> bookList = new ArrayList<>();
 
 		StringBuilder sql = new StringBuilder();
 		sql.append("select no, isbn, title, writer, publisher, is_rented ");
-		sql.append(" from book_board ");
-		sql.append(" where instr(title, ?) !=0");
+		sql.append(" from t_book ");
+		sql.append(" where instr(title, ?) > 0");
 
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
@@ -136,23 +172,23 @@ public class BookDAO {
 				int is_rented = rs.getInt("is_rented");
 
 				book = new BookVO(no, isbn, title, writer, publisher, is_rented);
-
+				bookList.add(book);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return book;// if를 만족하지 않으면 null값일 것
+		return bookList;// if를 만족하지 않으면 null값일 것
 	}
 
-	public BookVO selectByWriter(String writerf) {// 저자 검색용
-
-		BookVO book = null;
+	public List<BookVO> selectByWriter(String writerf) {// 저자 검색용
+		//검색 결과는 1이 아닐 것이므로...
+		List<BookVO> bookList = new ArrayList<>();
 
 		StringBuilder sql = new StringBuilder();
 		sql.append("select no, isbn, title, writer, publisher, is_rented ");
-		sql.append(" from book_board ");
-		sql.append(" where instr(writer, ?) !=0");
+		sql.append(" from t_book ");
+		sql.append(" where instr(writer, ?) > 0");
 
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
@@ -170,21 +206,56 @@ public class BookDAO {
 				String publisher = rs.getString("publisher");
 				int is_rented = rs.getInt("is_rented");
 
-				book = new BookVO(no, isbn, title, writer, publisher, is_rented);
-
+				BookVO book = new BookVO(no, isbn, title, writer, publisher, is_rented);
+				bookList.add(book);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return book;// if를 만족하지 않으면 null값일 것
+		return bookList;// if를 만족하지 않으면 null값일 것
+	}
+	
+	public List<BookVO> selectByPublisher(String Publisher) {// 출판사 검색용
+
+		List<BookVO> bookList = new ArrayList<>();
+
+		StringBuilder sql = new StringBuilder();
+		sql.append("select no, isbn, title, writer, publisher, is_rented ");
+		sql.append(" from t_book ");
+		sql.append(" where instr(publisher, ?) > 0");
+
+		try (Connection conn = new ConnectionFactory().getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+			) {
+
+			pstmt.setString(1, Publisher);
+
+			ResultSet rs = pstmt.executeQuery();// 최대 한줄이라 next가 필요 없을 것
+
+			if (rs.next()) {// true면...
+				int no = rs.getInt("no");
+				String isbn = rs.getString("isbn");
+				String title = rs.getString("title");
+				String writer = rs.getString("writer");
+				String publisher = rs.getString("publisher");
+				int is_rented = rs.getInt("is_rented");
+
+				BookVO book = new BookVO(no, isbn, title, writer, publisher, is_rented);
+				bookList.add(book);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bookList;// if를 만족하지 않으면 null값일 것
 	}
 
 	public boolean selectByIssbn(String isb) {// isb 내용 확인용 boolean으로 하면 int로 받는거보다 훨씬 행복해진다...교체하려면 다 교체해야함!!!!!
 
 		StringBuilder sql = new StringBuilder();
 		sql.append("select instr(isbn, ?) ");// instr 때문에 전부 입력받아야함....그리고 애초에 등록이라 다 입력해야함!!
-		sql.append(" from book_board ");
+		sql.append(" from t_book ");
 
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
@@ -210,7 +281,7 @@ public class BookDAO {
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append("delete ");
-		sql.append(" from book_board ");
+		sql.append(" from t_book ");
 		sql.append(" where isbn = ? ");
 		
 		try (Connection conn = new ConnectionFactory().getConnection();

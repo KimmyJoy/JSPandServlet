@@ -65,7 +65,7 @@ public class UserDAO {
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append("select * ");
-		sql.append("  from t_member ");
+		sql.append("  from t_user ");
 		sql.append(" where id = ? and password = ? ");
 		
 		try(

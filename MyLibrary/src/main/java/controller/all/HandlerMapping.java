@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import controller.admin.AdminpageController;
+import controller.book.RentalController;
+import controller.book.SearchbookController;
+import controller.book.ShowallbookList;
 import controller.user2.InsertUserController;
 import controller.user2.InsertUserProcessController;
 //import controller.user.InsertUserController;
@@ -27,7 +30,9 @@ public class HandlerMapping {
 		mappings.put("/Mypage.do", new MypageController());
 		mappings.put("/insertuser.do", new InsertUserController());
 		mappings.put("/insertuserprocess.do", new InsertUserProcessController());
-		mappings.put("/searchbook.do", new SearchBookController());
+		mappings.put("/searchbook.do", new SearchbookController());
+		mappings.put("/rentprocess.do", new RentalController());
+		mappings.put("/showallbook.do", new ShowallbookList());
 		System.out.println("지금 이게 되고 있나요?");
 	}
 	public Controller getController(String path) {
