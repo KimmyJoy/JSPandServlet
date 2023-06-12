@@ -1,11 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-euiv="Content-Type" content= "text/html" charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+  $('.tel').keydown(function(event) {
+      var key = event.charCode || event.keyCode || 0;
+      $text = $(this);
+      if (key !== 8 && key !== 9) {
+          if ($text.val().length === 3) {
+              $text.val($text.val() + '-');
+          }
+          if ($text.val().length === 8) {
+              $text.val($text.val() + '-');
+          }
+      }
+
+      return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));          
+  });
+</script>
 </head>
 <body>
 <h1>
@@ -30,11 +46,11 @@
 		</tr>
 		<tr>
 			<td>이름</td>
-			<td><input type="text" name="name" placeholder="클로빵미"/>
+			<td><input type="text" name="name" placeholder="아무개"/>
 		</tr>
 		<tr>
 			<td>휴대 전화 번호</td>
-			<td><input type="text" name="phonenum" maxlength="13" placeholder="01011112222"/>
+			<td><input type="text" class="tel" name="phonenum" maxlength="13" placeholder="01011112222"/>
 		</tr>
 		<tr>
 			<td>이메일</td>

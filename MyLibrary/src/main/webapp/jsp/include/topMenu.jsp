@@ -3,17 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="/MyLibrary/jsp/layout.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        $('.dropdown').hover(function () {
-            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-        }, function () {
-            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-        });
-    });
-</script>
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <div class="col-md-3 mb-2 mb-md-0">
@@ -22,18 +11,10 @@
             </a>
         </div>
 
-        <nav class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <nav class="nav col-12 col-md-auto mb-2 justify-content-left mb-md-0">
             <ul class="nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        자료 검색
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">통합검색</a></li>
-                        <li><a class="dropdown-item" href="#">저자 검색</a></li>
-                        <li><a class="dropdown-item" href="#">도서명 검색</a></li>
-                        <li><a class="dropdown-item" href="#">ISBN 검색</a></li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="main.do">홈</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">이용 안내</a>
@@ -67,6 +48,19 @@
     </header>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        $('.dropdown').hover(function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+        }, function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+        });
+    });
+</script>
+</body>
+</html>
 <%-- <table style="width:100%" border="1">
 	<tr>
 		<td rowspan="2"><img src ="/WebTest/img/logo.webp" width ="10%"></td>

@@ -24,7 +24,6 @@ public class RentalController implements Controller {
 		String isbn = request.getParameter("isbn");
 		System.out.println(isbn+"제대로 들어왔나요?");
 		BookDAO dao = new BookDAO();
-		BookVO vo = new BookVO();
 		RentalDAO rentDao = new RentalDAO();
 		
 		if (session.getAttribute("loginUser") != null) {
@@ -49,13 +48,12 @@ public class RentalController implements Controller {
                     query = ""; // query가 null인 경우 빈 문자열로 대체
                 }
                 String searchType = request.getParameter("searchType");
-                String redirectUrl = "redirect:/searchbook.do?searchType=" + searchType + "&query=" + URLEncoder.encode(query, "UTF-8");
+                String redirectUrl = "redirect:/rentprocess.do?searchType=" + searchType + "&query=" + URLEncoder.encode(query, "UTF-8");
 
                 return redirectUrl; // 대여 성공 후 검색 결과 페이지로 리다이렉트
             }
         }
     }
-
-        return "redirect:/login"; // 로그인 페이지로 리다이렉트
+        return null; // 로그인 페이지로 리다이렉트
     }
 }

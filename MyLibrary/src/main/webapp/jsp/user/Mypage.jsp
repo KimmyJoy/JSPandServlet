@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,23 +39,18 @@ function loadPage(pageName) {
 							<th>도서명</th>
 							<th>저자</th>
 							<th>출판사</th>
+							<th>대여일</th>
 							<th>반납일</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>도서 1</td>
-							<td>저자 1</td>
-							<td>출판사 1</td>
+							<td>살빼고 싶지만 떡볶이는 먹고 싶어</td>
+							<td>오뎅도</td>
+							<td>정말요</td>
 							<td>2023-06-30</td>
+							<td>2023-07-13</td>
 						</tr>
-						<tr>
-							<td>도서 2</td>
-							<td>저자 2</td>
-							<td>출판사 2</td>
-							<td>2023-07-10</td>
-						</tr>
-						<!-- 다른 도서 정보 추가 -->
 					</tbody>
 				</table>
 			</div>

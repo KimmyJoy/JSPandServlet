@@ -16,6 +16,9 @@ public class SearchbookController implements Controller {
 				String searchType = request.getParameter("searchType");
 				String query = request.getParameter("query");
 				// 검색 조건에 따라 적절한 DAO 메서드를 호출하여 검색 결과를 가져온다
+				System.out.println(searchType);
+				System.out.println(query);
+				
 				List<BookVO> bookList = null;
 				BookDAO dao = new BookDAO();
 				

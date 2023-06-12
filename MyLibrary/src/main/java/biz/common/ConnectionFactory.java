@@ -11,16 +11,16 @@ public class ConnectionFactory {
 		Connection conn = null;
 		System.out.println("내가 돌아가고 있나요?");
 //		try {
-//			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Class.forName("org.h2.Driver");
-			String url = "jdbc:h2:tcp://localhost/~/test";
-			String user = "sa";
-//			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-//			String user = "hr";
-//			String password = "hr";
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+//			Class.forName("org.h2.Driver");
+//			String url = "jdbc:h2:tcp://localhost/~/test";
+//			String user = "sa";
+			String url = "jdbc:oracle:thin:@localhost:1521:xe";
+			String user = "hr";
+			String password = "hr";
 			
-			conn = DriverManager.getConnection(url, user, "");
-//			conn = DriverManager.getConnection(url, user, password);
+//			conn = DriverManager.getConnection(url, user, "");
+			conn = DriverManager.getConnection(url, user, password);
 			
 //		} catch (Exception e) {
 //			e.printStackTrace();

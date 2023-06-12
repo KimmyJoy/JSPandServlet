@@ -5,7 +5,6 @@
 	integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="./css/style.css">
-
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
@@ -19,14 +18,12 @@
 <div id="booklist-container"></div>
    <jsp:include page="/jsp/include/searchbar.jsp"/><br>
   <div class="btn-group">
-   <button type="button" class="btn btn-success" data-toggle="modal"
-						data-target="#addNewBook" aria-expanded="false">신규도서 등록</button>
+   <button type="button" class="btn btn-success">신규도서 등록</button>
 </div>
 
 <div class="btn-group">
-    <button type="button" class="btn btn-success" aria-expanded="false">삭제</button>
+    <button type="button" class="btn btn-success">삭제</button>
     <br>
-</div>
 </div>
 </div>
 
@@ -41,9 +38,8 @@
 <div id="member_management" class="page">
   <!-- 회원 관리 페이지 내용 -->
   <h2>회원 관리 페이지</h2>
-  <!-- 추가적인 내용 작성 -->
+   <button type="button" class="btn btn-outline-primary" onclick="location.href='insertuser.do'">회원 추가</button>
 </div>
-
 <!-- 정보 수정 페이지 -->
 <div id="profile" class="page">
   <!-- 정보 수정 페이지 내용 -->

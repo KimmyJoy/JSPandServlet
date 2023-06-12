@@ -40,10 +40,11 @@
 							<c:when test="${book.is_rented == '1'}">
 								<c:choose>
 									<c:when test="${empty loginUser}">
-										<button type="button" class="btn btn-success" id="login-button" onclick="redirectToLogin()">대여 가능</button>
+										<button type="button" class="btn btn-success" id="login-button">대여 가능</button>
+										<!-- ajax로 가져온 경우  -->
 									</c:when>
 									<c:otherwise>
-										<button type="button" class="btn btn-success" id="confirmation-button" onclick="showConfirmation('${book.isbn}')">대여 가능</button>
+										<button type="button" class="btn btn-success" id="confirmation-button">대여 가능</button>
 									</c:otherwise>
 								</c:choose>
 							</c:when>

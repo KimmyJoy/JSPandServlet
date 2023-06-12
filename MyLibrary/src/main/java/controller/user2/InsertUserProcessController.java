@@ -16,6 +16,11 @@ public class InsertUserProcessController implements Controller {
 		String name = request.getParameter("name");
 		String phonenum = request.getParameter("phonenum");
 		String email = request.getParameter("email");
+		String role = request.getParameter("role");
+		
+		if(role == null) {
+			role = "U";
+		}
 		
 		UserVO vo = new UserVO();
 		vo.setId(id);
@@ -23,6 +28,7 @@ public class InsertUserProcessController implements Controller {
 		vo.setName(name);
 		vo.setPhonenum(phonenum);
 		vo.setEmail(email);
+		vo.setRole(role);
 		
 		UserDAO dao = new UserDAO();
 		dao.insertUser(vo);

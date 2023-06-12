@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 function searchBooks() {
   var searchType = document.querySelector('select[name="searchType"]').value;
   var query = document.querySelector('input[name="query"]').value;
+  
+  console.log(searchType);
+  console.log(query);
 
   // AJAX 요청 생성
   var xhr = new XMLHttpRequest();
@@ -54,6 +58,8 @@ function showConfirmation() {
 	if (confirm("해당 책을 대여하시겠습니까?")) {
 		window.location.href = "rentprocess.do?isbn=${book.isbn}";
 	}
+//이쪽단에서 keyaction을 주고 있는 것이나 마찬가지라서 해당 버튼이 적용되는 곳에서는(booklit의 버튼) onclick이벤트를 주면 안된다
+//ajax보다 onclick 이벤트가 더 우선시 되기 때문
 }
 </script>
 <div class="search-bar">
