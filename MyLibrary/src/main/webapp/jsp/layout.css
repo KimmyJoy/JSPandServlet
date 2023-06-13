@@ -132,3 +132,30 @@ footer {
 	flex: 1;
 	padding: 20px;
 }
+
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content:center;
+  justify-content: flex-center; /* Align items to the right */
+}
+
+.search-bar .input-group {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.search-bar select.form-select {
+  width: auto;
+  max-width: 100px; /* Adjust the maximum width as needed */
+}
+
+.search-bar input.form-control {
+  flex: 1;
+}
+
+.search-bar button.btn.btn-primary {
+  flex-shrink: 0; /* Prevent the button from shrinking */
+  margin-left: 10px;
+}
