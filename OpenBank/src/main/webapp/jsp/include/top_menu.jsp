@@ -3,37 +3,63 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="/OpenBank/src/main/webapp/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<header class="p-3 text-white">
-    <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-        </a>
-  <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 text-secondary">비대면 계좌 계설</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">계좌 이체</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">거래 내역 조회</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">FAQ</a></li>
-          <li><a href="#" class="nav-link px-2 text-white"><c:if test="${loginUser.role eq '0' }">도서 및 회원 관리</c:if></a></li>
-	<li><a href="#" class="nav-link px-2 text-white"><c:if test="${loginUser.role eq '1' }">마이페이지</c:if></a></li>
-        </ul>
 
-        <div class="col-md-3 text-end navbar-right justify-content-between">
-            <c:choose>
-                <c:when test="${ not empty loginUser }">
-                    <button type="button" class="btn btn-outline-light me-2" onclick="location.href='logout.do'">로그아웃</button>
-                </c:when>
-                <c:otherwise>
-                  <button type="button" class="btn btn-warning" onclick="location.href='insertuser.do'">회원 가입</button>
-          	     <button type="button" class="btn btn-outline-light me-2" onclick="location.href='login.do'">로그인</button>
-                </c:otherwise>
-            </c:choose>
-         </div>
+<style>
+  .header-custom {
+    background-color: rgb(62,76,141);
+  }
+
+  .nav-link {
+    color: white !important;
+  }
+
+  .btn-outline-light {
+    color: white;
+    border-color: white;
+  }
+
+  .btn-outline-light:hover {
+    background-color: gray;
+    color: white;
+  }
+
+  .btn-warning:hover {
+    background-color: dark-gray;
+    border-color: dark-gray;
+  }
+</style>
+
+<header class="p-3 text-white header-custom">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+          <use xlink:href="#bootstrap"></use>
+        </svg>
+      </a>
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="#" class="nav-link px-2 text-secondary">비대면 계좌 계설</a></li>
+        <li><a href="#" class="nav-link px-2 text-white">계좌 이체</a></li>
+        <li><a href="#" class="nav-link px-2 text-white">거래 내역 조회</a></li>
+        <li><a href="#" class="nav-link px-2 text-white">FAQ</a></li>
+        <li><a href="#" class="nav-link px-2 text-white"><c:if test="${loginUser.role eq '0' }">회원 관리</c:if></a></li>
+        <li><a href="#" class="nav-link px-2 text-white"><c:if test="${loginUser.role eq '1' }">마이페이지</c:if></a></li>
+      </ul>
+      <div class="col-md-3 text-end navbar-right justify-content-between">
+        <c:choose>
+          <c:when test="${ not empty loginUser }">
+            <button type="button" class="btn btn-outline-light me-2" onclick="location.href='logout.do'">로그아웃</button>
+          </c:when>
+          <c:otherwise>
+            <button type="button" class="btn btn-warning" onclick="location.href='insertuser.do'">회원 가입</button>
+            <button type="button" class="btn btn-outline-light me-2" onclick="location.href='login.do'">로그인</button>
+          </c:otherwise>
+        </c:choose>
       </div>
     </div>
-    </header>
+  </div>
+</header>
 
 
 <%--     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">

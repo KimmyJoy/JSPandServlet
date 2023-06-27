@@ -8,107 +8,126 @@ import java.util.List;
 
 import joybank.common.ConnectionFactory;
 
+	public class UserDAO {
 
-public class UserDAO {
+		public void insertUser(UserVO users) throws Exception {
+
+	        StringBuilder sql = new StringBuilder();
+	        sql.append("insert into Userinfo(u_id, u_pw, u_nm, u_num, u_identy, u_email, u_add, sys_join, u_stat, u_role) ");
+	        sql.append(" values(?, ?, ?, ?, ?, ?, ?, defualt, ?, ?)");
+
+	        try (Connection conn = new ConnectionFactory().getConnection();
+	             PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+	        	
+	        	//숫자 다 적을 필요없이 알아서 늘어나게 하는 법....변수 지정해서 내부에서 ++하면 됨ㅠ후위라 바로 첫번째부터 ++해도 됨
+	        	int loc = 1;
+	            pstmt.setString(loc++, users.getU_id());
+	            pstmt.setString(loc++, users.getU_pw());
+	            pstmt.setString(loc++, users.getU_nm());
+	            pstmt.setString(loc++, users.getU_num());
+	            pstmt.setString(loc++, users.getU_identy());
+	            pstmt.setString(loc++, users.getU_email());
+	            pstmt.setString(loc++, users.getU_add());
+	            pstmt.setString(loc++, users.getU_stat());
+	            pstmt.setInt(loc++, users.getU_role());
+
+	            pstmt.executeUpdate();
+
+	        } catch (Exception e) {
+
+	        }
+	    }
+
+
+		  public void updateUser(UserVO user) throws Exception {
+		        StringBuilder sql = new StringBuilder();
+		        sql.append("update Userinfo set u_pw = ?, u_nm = ?, u_num = ?, u_identy = ?, u_email = ?, u_add = ?, sys_join = ?, u_stat = ?, u_role = ? where u_id = ?");
+
+		        try (Connection conn = new ConnectionFactory().getConnection();
+		             PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+		             
+		        	int loc = 1;
+		            pstmt.setString(loc++, user.getU_pw());
+		            pstmt.setString(loc++, user.getU_nm());
+		            pstmt.setString(loc++, user.getU_num());
+		            pstmt.setString(loc++, user.getU_identy());
+		            pstmt.setString(loc++, user.getU_email());
+		            pstmt.setString(loc++, user.getU_add());
+		            pstmt.setString(loc++, user.getU_sysjoin());
+		            pstmt.setString(loc++, user.getU_stat());
+		            pstmt.setInt(loc++, user.getU_role());
+		            pstmt.setString(loc++, user.getU_id());
+
+		            pstmt.executeUpdate();
+		        } catch (Exception e) {
+		            throw e;
+		        }
+		    }
 	
-	public void insertUser(UserVO users) {// t_user로...하면 되는 것...
+		  
+		public UserVO getUser(UserVO vo) {
+	        UserVO user = null;
 
-		// boardList.add(board); DB용으로 필요 없어짐 쿼리가 필요해짐 1.7버전의 try 캐치문을 쓸예정임
-		StringBuilder sql = new StringBuilder();
-		sql.append("insert into t_users(id, password, name, phonenum, email, role) "); // no는 nextval로 이루어져있고 trigger처리 하여 넣지 않아도 됨
-		sql.append(" values(?, ?, ?, ?, ?, ?) ");// 내용이 어떻게 적힐지 모르는 변수는 ?임 이야아아앙... 이변수값은 board
-																		// 변수가 알고 있음
+	        StringBuilder sql = new StringBuilder();
+	        sql.append("select * from Userinfo where u_id = ? and u_pw = ?");
 
-		try (Connection conn = new ConnectionFactory().getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-			int role = users.getRole_cd();
-//			if (role == 0) {
-//				role = "true";
-//			}
-			pstmt.setString(1, users.getU_id());
-			pstmt.setString(2, users.getU_pw());
-			pstmt.setString(3, users.getU_nm());
-			pstmt.setString(4, users.getU_num());
-			pstmt.setString(5, users.getU_identy());
-			pstmt.setString(6, users.getU_email());
-			pstmt.setString(7, users.getU_address());
-			pstmt.setString(8, users.getU_sysjoin());
-			pstmt.setString(9, users.getU_birth());
-
-			pstmt.executeUpdate();// 종료하는건 쓸필요 없음...자동종료 메소드를 호출하니까
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public UserVO getUser(UserVO vo) {
-		UserVO user = null;
-		
-		StringBuilder sql = new StringBuilder();
-		sql.append("select* from t_users where id = ? and password = ?");
-		
-		try (Connection conn = new ConnectionFactory().getConnection();
-			 PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-			pstmt.setString(1, vo.getId());
-			pstmt.setString(2, vo.getPassword());
-			
-			ResultSet rs = pstmt.executeQuery();
-			if(rs.next()) {
-				user = new UserVO();
-				user.setId(rs.getString("ID"));
-				user.setPassword(rs.getString("PASSWORD"));
-				user.setName(rs.getString("NAME"));
-				user.setPhonenum(rs.getString("PHONENUM"));
-				user.setEmail(rs.getString("EMAIL"));
-				user.setRole(rs.getString("ROLE"));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}		
-		return user;
-	}
+	        System.out.println("들어오셨나요?");
+	        try (Connection conn = new ConnectionFactory().getConnection();
+	             PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+	             
+	            pstmt.setString(1, vo.getU_id());
+	            pstmt.setString(2, vo.getU_pw());
+	            
+	            ResultSet rs = pstmt.executeQuery();
+	            //그냥 가져온 데이터를 set 하는 것이라서 아래와 같은 방식이 오류를 조금 더 줄여줄 수 있고 코드가 직관적이됨
+	            if(rs.next()) {
+	            	 user = new UserVO(
+	                         rs.getString("u_id"), 
+	                         rs.getString("u_pw"), 
+	                         rs.getString("u_nm"), 
+	                         rs.getString("u_num"), 
+	                         rs.getString("u_identy"), 
+	                         rs.getString("u_email"), 
+	                         rs.getString("u_add"), 
+	                         rs.getString("sys_join"), 
+	                         rs.getString("u_stat"), 
+	                         rs.getInt("u_role"));
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return user;
+	    }
 	
 	
-	public UserVO getuserByid(String iD) {// 특정 아이디 검색이 가능한 쿼리실행
-
-		UserVO user = null;
-		StringBuilder sql = new StringBuilder();
-		sql.append("select id, password, name, phonenum, email, role ");
-		sql.append(" from t_users ");
-		sql.append(" where id= ? ");
-
-		try (Connection conn = new ConnectionFactory().getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-
-			System.out.println(iD);
-			pstmt.setString(1, iD);
-
-			ResultSet rs = pstmt.executeQuery();// 최대 한줄이라 while(rs.next())가 필요 없을 것
-
-			if (rs.next()) {// true면...
-				String id = rs.getString("id");
-				String password = rs.getString("password");
-				String name = rs.getString("name");
-				String phonenum = rs.getString("phonenum");
-				String email = rs.getString("email");
-				String role = rs.getString("role");
-
-				user = new UserVO(id, password, name, phonenum, email, role);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return user;// if를 만족하지 않으면 null값일 것
-	}
+		/*
+		 * public UserVO getuserByid(String iD) {// 특정 아이디 검색이 가능한 쿼리실행
+		 * 
+		 * UserVO user = null; StringBuilder sql = new StringBuilder();
+		 * sql.append("select id, password, name, phonenum, email, role ");
+		 * sql.append(" from t_users "); sql.append(" where id= ? ");
+		 * 
+		 * try (Connection conn = new ConnectionFactory().getConnection();
+		 * PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+		 * 
+		 * System.out.println(iD); pstmt.setString(1, iD);
+		 * 
+		 * ResultSet rs = pstmt.executeQuery();// 최대 한줄이라 while(rs.next())가 필요 없을 것
+		 * 
+		 * if (rs.next()) {// true면... String id = rs.getString("id"); String password =
+		 * rs.getString("password"); String name = rs.getString("name"); String phonenum
+		 * = rs.getString("phonenum"); String email = rs.getString("email"); String role
+		 * = rs.getString("role");
+		 * 
+		 * user = new UserVO(id, password, name, phonenum, email, role); } } catch
+		 * (Exception e) { e.printStackTrace(); } return user;// if를 만족하지 않으면 null값일 것 }
+		 */
 	
 	//0.회원가입/로그인1단계-ID 중복 검색하는 메소드.
 			public boolean isDuplicatedId(String id) {
 				
-//				MemberVO mem = null;
-				
 				StringBuilder sql = new StringBuilder();
-				sql.append("SELECT INSTR(ID, ?), ID FROM t_users ");
+				sql.append("SELECT INSTR(U_ID, ?), ID FROM Userinfo ");
 				
 				try(
 					Connection conn = new ConnectionFactory().getConnection();
@@ -121,7 +140,7 @@ public class UserDAO {
 					//쿼리를 실행하고 결과가 있으면
 					while(rs.next()) {
 						//입력받은 문자와 비교하고 같으면 true
-						if(rs.getString("ID").equalsIgnoreCase(id))
+						if(rs.getString("U_ID").equalsIgnoreCase(id))
 							return true;
 					}
 					
@@ -137,7 +156,7 @@ public class UserDAO {
 			public boolean isEqauls(String id, String password) {
 				
 				StringBuilder sql = new StringBuilder();
-				sql.append("SELECT * FROM t_users WHERE ID = ? AND PASSWORD = ? ");
+				sql.append("SELECT * FROM Userinfo WHERE U_ID = ? AND U_PW = ? ");
 				
 				try(
 					Connection conn = new ConnectionFactory().getConnection();
@@ -149,7 +168,7 @@ public class UserDAO {
 					ResultSet rs = pstmt.executeQuery();
 					//쿼리를 실행하고 정보가 둘 다 일치하면
 					while(rs.next()) {
-						if(rs.getString("ID").equalsIgnoreCase(id) && rs.getString("PASSWORD").equals(password))
+						if(rs.getString("u_id").equalsIgnoreCase(id) && rs.getString("u_pw").equals(password))
 							return true;
 					}
 					
@@ -162,71 +181,47 @@ public class UserDAO {
 	
 	
 	
-	public List<UserVO> selectAllusers() {// 관리자에게 회원관리번호를 포함하여 출력하는 메소드
+			  public List<UserVO> getAllUsers() throws Exception {
+			        List<UserVO> users = new ArrayList<>();
+			        String sql = "select * from Userinfo";
 
-		List<UserVO> userList = new ArrayList<>();// 보드 vo를 감싸안아줄 list가 필요함
-
-		// String sql = "select * from t_board";//연월일시분초가 다 ㄴ나오므로 이게 아니고 다른 형태로 해야 함
-		StringBuilder sql = new StringBuilder();
-		sql.append("select id, password, name, phonenum, email, role ");
-		sql.append(" from t_users ");
-		sql.append(" order by no desc ");// 가장최근순으로 하기 위해
-
-		try (
-				// 1. 접속개체를 얻어와야 함
-				Connection conn = new ConnectionFactory().getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-
-			// 익스큐트 쿼리
-			ResultSet rs = pstmt.executeQuery();// 리턴타입이 rsultset임
-
-			while (rs.next()) {
-				String id = rs.getString("id");
-				String password = rs.getString("password");
-				String name = rs.getString("name");
-				String phonenum = rs.getString("phonenum");
-				String email = rs.getString("email");
-				String role = rs.getString("role"); // 여기서 숫자를 쓸 수 있음...4번째 컬럼을 가져오라고 하려면 rs.getString(4)라고 해도 됨
-
-				UserVO user = new UserVO(id, password, name, phonenum, email, role);// 매개변수가진걸 boardvo에
-																								// 만들어뒀었으므로....가져오면 됨
-				/*
-				 * 위가 싫으면 이렇게 하면 됨 BookVO board = new BookVO board.setNO(no);
-				 * board.setTitle(title); board.setwriter(writer); board.setregDate(regDate);
-				 */
-//				System.out.println(board);
-				userList.add(user);// 애드해야함...
-
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return userList; // 보드 vo를 감싸안을 애를 만들고 리턴해줘야함...
-	}
+			        try (Connection conn = new ConnectionFactory().getConnection();
+			             PreparedStatement pstmt = conn.prepareStatement(sql);
+			             ResultSet rs = pstmt.executeQuery()) {
+			             
+			            while(rs.next()) {
+			                UserVO user = new UserVO();
+			                user.setU_id(rs.getString("u_id"));
+			                user.setU_pw(rs.getString("u_pw"));
+			                user.setU_nm(rs.getString("u_nm"));
+			                user.setU_num(rs.getString("u_num"));
+			                user.setU_identy(rs.getString("u_identy"));
+			                user.setU_email(rs.getString("u_email"));
+			                user.setU_add(rs.getString("u_add"));
+			                user.setU_sysjoin(rs.getString("sys_join"));
+			                user.setU_stat(rs.getString("u_stat"));
+			                user.setU_role(rs.getInt("u_role"));
+			                users.add(user);
+			            }
+			        } catch (Exception e) {
+			            throw e;
+			        }
+			        return users;
+			    }
 	
 	
-	public void deleteUser(String id) {
+			  public void deleteUser(UserVO user) throws Exception {
+			        StringBuilder sql = new StringBuilder();
+			        sql.append("delete from UserInfo where u_id = ?");
 
-		StringBuilder sql = new StringBuilder();
-		sql.append("delete ");// instr 때문에 전부 입력받아야함....그리고 애초에 등록이라 다 입력해야함!!
-		sql.append(" from t_users ");
-		sql.append(" where id = ? ");
-
-		try (Connection conn = new ConnectionFactory().getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-
-			pstmt.setString(1, id);
-			pstmt.executeUpdate();
-
-//		if(cnt == 0) {
-//			return true;
-//		}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+			        try (Connection conn = new ConnectionFactory().getConnection();
+			             PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+			             
+			            pstmt.setString(1, user.getU_id());
+			            pstmt.executeUpdate();
+			        } catch (Exception e) {
+			            throw e;
+			        }
+			    }
 	
 }

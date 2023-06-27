@@ -18,8 +18,6 @@ public class DispatcherServlet extends HttpServlet {
 	private HandlerMapping mappings;
        
 	
-	
-	
     @Override
 	public void init(ServletConfig config) throws ServletException {
 		String propLoc = config.getInitParameter("propLoc");
@@ -39,9 +37,19 @@ public class DispatcherServlet extends HttpServlet {
 		String callPage = ctrl.handleRequest(request, response);
 		System.out.println("jsp : " + callPage);
 		
+		/*
+		 * if (ctrl != null) { String viewPage = ctrl.handleRequest(request, response);
+		 * 사실 ctrl이 null 일 경우가 없음
+		 * if(viewPage.startsWith("redirect:")) { String viewUrl =
+		 * viewPage.substring("redirect:".length());
+		 * response.sendRedirect(request.getContextPath() + viewUrl); } else {
+		 * RequestDispatcher rd = request.getRequestDispatcher(viewPage);
+		 * rd.forward(request, response); } }
+		 */
+		
 		
 		if(callPage.startsWith("redirect:")) {//만약 callpage의 서두가 redirect로 시작되면 아래 문장 수행하고 아니면 else 뒤의 문장 수행해
-			response.sendRedirect(callPage.substring("redirect:".length()));
+			response.sendRedirect(request.getContextPath() +callPage.substring("redirect:".length()));
 			//근데 날아오는건 앞에 우리가 추가한 "redirect:"가 존재하니까 이걸 없애달라고 요청하는 것
 		} else {
 		RequestDispatcher dispatcher = request.getRequestDispatcher(callPage);

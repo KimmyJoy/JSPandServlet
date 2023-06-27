@@ -27,7 +27,7 @@ public class HandlerMapping {
 	            String className = prop.getProperty(key.toString());
 	            System.out.println(key + " : " + className);
 	            
-
+	            System.out.println(className);
 	            Class<?> clz = Class.forName(className);
 	            Constructor<?> constructor = clz.getConstructor();
 	            
