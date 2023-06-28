@@ -9,7 +9,7 @@ public class SavingAccountVO {
 	String u_id;
 	String acc_nm;
 	String acc_pw;
-	String acc_bal;
+	long acc_bal;
 	Date acc_op_date;
 	double rate;
 	String acc_stat;
@@ -20,7 +20,7 @@ public class SavingAccountVO {
 	}
 	
 	
-	public SavingAccountVO(String bank_cd, String acc_no, String u_id, String acc_nm, String acc_pw, String acc_bal,
+	public SavingAccountVO(String bank_cd, String acc_no, String u_id, String acc_nm, String acc_pw, long acc_bal,
 			Date acc_op_date, double rate, String acc_stat) {
 		super();
 		this.bank_cd = bank_cd;
@@ -66,10 +66,10 @@ public class SavingAccountVO {
 	public void setAcc_pw(String acc_pw) {
 		this.acc_pw = acc_pw;
 	}
-	public String getAcc_bal() {
+	public long getAcc_bal() {
 		return acc_bal;
 	}
-	public void setAcc_bal(String acc_bal) {
+	public void setAcc_bal(long acc_bal) {
 		this.acc_bal = acc_bal;
 	}
 	

@@ -20,7 +20,7 @@ public class AccountService {
     
     public void updateAccount(SavingAccountVO acc) {
     	
-    	accountDAO.updateAccount(acc);
+    	accountDAO.createAccount(acc);
     }
 
 	/*
