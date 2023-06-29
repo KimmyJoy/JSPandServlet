@@ -29,10 +29,9 @@ public class SavingAccountDAO {
 	 // 계좌를 생성하는 메소드
 	public SavingAccountVO createAccount(SavingAccountVO account) {
 	    SavingAccountVO createdAccount = null;
-	    String bank_cd = "10";  // 안전을 위해 은행 코드를 직접 지정
 	    
 	    while (true) {
-	        String acc_no = AccountNumUtil.generateAccountNumber(bank_cd);
+	        String acc_no = AccountNumUtil.generateAccountNumber(account.getBank_cd(), account.getU_id());
 	        //중복 체크를 위한 구문 추가
 	        if (!isAccountNumberExist(acc_no)) {
 	            account.setAcc_no(acc_no);
@@ -67,26 +66,49 @@ public class SavingAccountDAO {
 
 
     // 계좌 번호가 이미 존재하는지 확인하는 메소드
+//	private boolean isAccountNumberExist(String acc_no) {
+//	    boolean isExist = false;
+//	    
+//	    StringBuilder sql = new StringBuilder();
+//	    sql.append("SELECT * FROM Saving_Account WHERE acc_no = ?");
+//	    
+//	    try (
+//	    	Connection conn = new ConnectionFactory().getConnection();
+//	        PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+//	        ResultSet rs = pstmt.executeQuery()
+//	    ) {
+//	        pstmt.setString(1, acc_no);
+//	        if (rs.next()) {
+//	            isExist = true;
+//	        }
+//	    } catch (Exception e) {
+//	        e.printStackTrace();
+//	    }
+//	    
+//	    return isExist;
+//	}
+	// 계좌 번호가 이미 존재하는지 확인하는 메소드
 	private boolean isAccountNumberExist(String acc_no) {
 	    boolean isExist = false;
-	    
+
 	    StringBuilder sql = new StringBuilder();
 	    sql.append("SELECT * FROM Saving_Account WHERE acc_no = ?");
-	    
+
 	    try (
-	    	Connection conn = new ConnectionFactory().getConnection();
-	        PreparedStatement pstmt = conn.prepareStatement(sql.toString());
-	        ResultSet rs = pstmt.executeQuery()
+	        Connection conn = new ConnectionFactory().getConnection();
+	        PreparedStatement pstmt = conn.prepareStatement(sql.toString())
 	    ) {
-	        pstmt.setString(1, acc_no);
-	        if (rs.next()) {
-	            isExist = true;
+	        pstmt.setString(1, acc_no);  // 쿼리 실행 전에 매개변수 설정
+
+	        try (ResultSet rs = pstmt.executeQuery()) {
+	            if (rs.next()) {
+	                isExist = true;
+	            }
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-	    
+
 	    return isExist;
 	}
-
 }

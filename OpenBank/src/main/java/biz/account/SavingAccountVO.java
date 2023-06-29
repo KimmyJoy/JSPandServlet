@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class SavingAccountVO {
 
-	String bank_cd;
-	String acc_no;
-	String u_id;
-	String acc_nm;
-	String acc_pw;
-	long acc_bal;
-	Date acc_op_date;
-	double rate;
-	String acc_stat;
+	private String bank_cd;
+	private String acc_no;
+	private String u_id;
+	private String acc_nm;
+	private String acc_pw;
+	private long acc_bal;
+	private Date acc_op_date;
+	private double rate;
+	private String acc_stat;
 	
 	
 	public SavingAccountVO() {

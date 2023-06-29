@@ -16,6 +16,7 @@ public class UserVO {
 	public UserVO() {
     }
 	
+	
 	public UserVO(String u_id, String u_pw, String u_nm, String u_num, String u_identy, String u_email,
 			String u_add, String sys_join, String u_stat, int u_role) {
 		super();

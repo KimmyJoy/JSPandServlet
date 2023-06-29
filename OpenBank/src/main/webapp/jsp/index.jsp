@@ -8,7 +8,7 @@
 <title>은행 사이트</title>
 <meta content="" name="description">
 <meta content="" name="keywords">
-<!-- Favicons -->
+<%-- <!-- Favicons -->
 <link href="${ pageContext.request.contextPath }/jsp/assets/img/favicon.png" rel="icon">
 <link href="${ pageContext.request.contextPath }/jsp/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
@@ -29,7 +29,7 @@
 
 <!-- Template Main CSS File -->
 <link href="${ pageContext.request.contextPath }/jsp/assets/css/style.css" rel="stylesheet">
-
+ --%>
 <!-- =======================================================
   * Template Name: Vesperr
   * Updated: May 30 2023 with Bootstrap v5.3.0
@@ -505,119 +505,6 @@
 		</section>
 		<!-- End More Services Section -->
 
-		<!-- ======= Features Section ======= -->
-		<section id="features" class="features">
-			<div class="container">
-
-				<div class="section-title" data-aos="fade-up">
-					<h2>Features</h2>
-					<p>Necessitatibus eius consequatur ex aliquid fuga eum quidem</p>
-				</div>
-
-				<div class="row" data-aos="fade-up" data-aos-delay="300">
-					<div class="col-lg-3 col-md-4">
-						<div class="icon-box">
-							<i class="ri-store-line" style="color: #ffbb2c;"></i>
-							<h3>
-								<a href="">Lorem Ipsum</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-						<div class="icon-box">
-							<i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
-							<h3>
-								<a href="">Dolor Sitema</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-						<div class="icon-box">
-							<i class="ri-calendar-todo-line" style="color: #e80368;"></i>
-							<h3>
-								<a href="">Sed perspiciatis</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
-						<div class="icon-box">
-							<i class="ri-paint-brush-line" style="color: #e361ff;"></i>
-							<h3>
-								<a href="">Magni Dolores</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4">
-						<div class="icon-box">
-							<i class="ri-database-2-line" style="color: #47aeff;"></i>
-							<h3>
-								<a href="">Nemo Enim</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4">
-						<div class="icon-box">
-							<i class="ri-gradienter-line" style="color: #ffa76e;"></i>
-							<h3>
-								<a href="">Eiusmod Tempor</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4">
-						<div class="icon-box">
-							<i class="ri-file-list-3-line" style="color: #11dbcf;"></i>
-							<h3>
-								<a href="">Midela Teren</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4">
-						<div class="icon-box">
-							<i class="ri-price-tag-2-line" style="color: #4233ff;"></i>
-							<h3>
-								<a href="">Pira Neve</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4">
-						<div class="icon-box">
-							<i class="ri-anchor-line" style="color: #b2904f;"></i>
-							<h3>
-								<a href="">Dirada Pack</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4">
-						<div class="icon-box">
-							<i class="ri-disc-line" style="color: #b20969;"></i>
-							<h3>
-								<a href="">Moton Ideal</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4">
-						<div class="icon-box">
-							<i class="ri-base-station-line" style="color: #ff5828;"></i>
-							<h3>
-								<a href="">Verdo Park</a>
-							</h3>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 mt-4">
-						<div class="icon-box">
-							<i class="ri-fingerprint-line" style="color: #29cc61;"></i>
-							<h3>
-								<a href="">Flavor Nivelanda</a>
-							</h3>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</section>
-		<!-- End Features Section -->
-
-
 		<!-- ======= Contact Section ======= -->
 		<section id="contact" class="contact">
 			<div class="container">
@@ -708,27 +595,6 @@
 	<!-- End #main -->
 	
 	
-	<!-- The Modal -->
-<div id="myModal" class="modal">
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>로그인</h2>
-    <form method="post" action="" name="loginForm">
-      <div class="mb-3">
-        <label for="id" class="form-label">ID</label> 
-        <input type="text" class="form-control" id="id" name="id" placeholder="대소문자 영문 5자리">
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label> 
-        <input type="password" class="form-control" id="password" name="password" placeholder="영문 대소문자 및 숫자 4자리 이상">
-      </div>
-      <button type="submit" class="btn btn-primary" id="loginSubmit">로그인</button>
-    </form>
-  </div>
-</div>
-
-
 	<!-- ======= Footer ======= -->
 	<jsp:include page="footer.jsp"></jsp:include>
 	<!-- End Footer -->
@@ -736,7 +602,7 @@
 	<a href="#"
 		class="back-to-top d-flex align-items-center justify-content-center"><i
 		class="bi bi-arrow-up-short"></i></a>
-<!-- Vendor JS Files -->
+<%-- <!-- Vendor JS Files -->
 	<script src="${ pageContext.request.contextPath }/jsp/assets/vendor/purecounter/purecounter_vanilla.js"></script>
 	<script src="${ pageContext.request.contextPath }/jsp/assets/vendor/aos/aos.js"></script>
 	<script src="${ pageContext.request.contextPath }/jsp/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -747,7 +613,7 @@
 	
 	<!-- Template Main JS File -->
 	<script src="${ pageContext.request.contextPath }/jsp/assets/js/main.js"></script>
-
+ --%>
 <script>
 // loadPage 함수 구현
 function loadPage(pageId) {
@@ -755,65 +621,6 @@ function loadPage(pageId) {
     var contentArea = document.getElementById("content");
     contentArea.innerHTML = pageContent.innerHTML;
   }
-</script>
-<script>
-//특이점: 모달의 경우 팝업 시 중앙에 위치하기 위해서는 css가 script 상에 위치해있어야한다
-// 모달가져오기
-var modal = document.getElementById('myModal');
-
-// 모달을 가져오기 위해 사용되는 버튼 링크(id를 통해서)
-var btn = document.getElementById('myBtn');
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName('close')[0];
-
-// 연계된 버튼 클릭 시 모달창 보여주기
-btn.onclick = function() {
-	  modal.style.display = "block";
-}
-
-// 사용자가 x 버튼 클릭 시 모달창 비활성화
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// 사용자가 다른 부분을 클릭 시 모달창 비활성화
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-
-function validateLoginForm() {
-	  var id = document.getElementById("id").value;
-	  var password = document.getElementById("password").value;
-	  
-	  $.ajax({
-	    url: '/OpenBank/loginprocess.do',
-	    type: 'POST',
-	    data: {
-	      id: id,
-	      password: password
-	    },
-	    success: function(data) {
-	      if(data.success) {
-	        alert("로그인 성공");
-	        location.href = '/OpenBank/main.do'; // if login is successful, redirect to main page
-	      } else {
-	    	  alert("로그인 실패: " + data.message);
-	      }
-	    },
-	    error: function(xhr, status, error) {
-	    	alert("에러 발생: " + error);
-	    },
-	    dataType: 'json'
-	  });
-	}
-//하단에 getElementByID는 로그인 입력창의 버튼과 매칭되므로 그쪽에 id로 loginSubmit 값을 입력해줘야함. 제대로 되지 않으면 addEventListener 오류가 발생하게 됨
-	document.getElementById("loginSubmit").addEventListener("click", function(event){
-	  event.preventDefault();
-	  validateLoginForm();
-	});
 </script>
 </body>
 </html>

@@ -13,9 +13,9 @@ import joybank.common.ConnectionFactory;
 		public void insertUser(UserVO users) throws Exception {
 
 	        StringBuilder sql = new StringBuilder();
-	        sql.append("insert into Userinfo(u_id, u_pw, u_nm, u_num, u_identy, u_email, u_add, sys_join, u_stat, u_role) ");
-	        sql.append(" values(?, ?, ?, ?, ?, ?, ?, defualt, ?, ?)");
-
+	        sql.append("insert into Userinfo(u_id, u_pw, u_nm, u_num, u_identy, u_email, u_add, u_role) ");
+	        sql.append(" values(?, ?, ?, ?, ?, ?, ?, ?)");
+	        //9
 	        try (Connection conn = new ConnectionFactory().getConnection();
 	             PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
 	        	
@@ -28,7 +28,6 @@ import joybank.common.ConnectionFactory;
 	            pstmt.setString(loc++, users.getU_identy());
 	            pstmt.setString(loc++, users.getU_email());
 	            pstmt.setString(loc++, users.getU_add());
-	            pstmt.setString(loc++, users.getU_stat());
 	            pstmt.setInt(loc++, users.getU_role());
 
 	            pstmt.executeUpdate();
@@ -220,7 +219,6 @@ import joybank.common.ConnectionFactory;
 			            pstmt.setString(1, user.getU_id());
 			            pstmt.executeUpdate();
 			        } catch (Exception e) {
-			            throw e;
 			        }
 			    }
 	

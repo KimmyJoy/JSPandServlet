@@ -18,17 +18,13 @@ public class AccountService {
     	return instance;
     }
     
-    public void updateAccount(SavingAccountVO acc) {
+    public SavingAccountVO updateAccount(SavingAccountVO acc) {
     	
-    	accountDAO.createAccount(acc);
+    	 // 계좌 생성 후 반환된 계좌 정보를 newAccount에 저장
+        SavingAccountVO newAccount = accountDAO.createAccount(acc);
+        return newAccount;
     }
 
-	/*
-	 * public SavingAccountVO getByid(String id) {
-	 * 
-	 * }
-	 */
-    
 }
 
 
