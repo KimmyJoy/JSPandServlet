@@ -27,6 +27,12 @@ public class UserService {
 				e.printStackTrace();
 			}
 	    }
+	    
+	    public UserVO getUser(UserVO user) {
+	    	UserVO uvo = udao.getUser(user);
+	    	
+	    	return uvo;
+	    }
 
 	    
 	}

@@ -165,8 +165,12 @@ import joybank.common.ConnectionFactory;
 					pstmt.setString(2, password);
 					
 					ResultSet rs = pstmt.executeQuery();
+					 System.out.println("Query executed, checking results...");
 					//쿼리를 실행하고 정보가 둘 다 일치하면
 					while(rs.next()) {
+						 String dbId = rs.getString("u_id");
+					        String dbPw = rs.getString("u_pw");
+					        System.out.println("DB ID: " + dbId + ", DB PW: " + dbPw);
 						if(rs.getString("u_id").equalsIgnoreCase(id) && rs.getString("u_pw").equals(password))
 							return true;
 					}
@@ -177,7 +181,6 @@ import joybank.common.ConnectionFactory;
 				//다르면 false 반환
 				return false;
 			}
-	
 	
 	
 			  public List<UserVO> getAllUsers() throws Exception {

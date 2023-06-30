@@ -159,9 +159,9 @@ const select = (el, all = false) => {
     }
   });
 
-  /**
+ /**
    * Testimonials slider
-   */
+   //기존
   new Swiper('.testimonials-slider', {
     speed: 600,
     loop: true,
@@ -187,6 +187,23 @@ const select = (el, all = false) => {
       }
     }
   });
+*/
+//수정
+new Swiper('.testimonials-slider', {
+  speed: 600,
+  loop: true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false
+  },
+  slidesPerView: 1,
+  pagination: {
+    el: '.swiper-pagination',
+    type: 'bullets',
+    clickable: true
+  },
+  spaceBetween: 20
+});
 
   /**
    * Porfolio isotope and filter

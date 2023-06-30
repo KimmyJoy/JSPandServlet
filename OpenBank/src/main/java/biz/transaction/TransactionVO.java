@@ -7,7 +7,7 @@ public class TransactionVO {
 	private String trans_no;
 	private String acc_no;
 	private String send_bank_cd;
-	private int trans_amount;
+	private long trans_amount;
 	private String recieve_bank_cd;
 	private String reciever;
 	private String trans_bal;
@@ -20,7 +20,7 @@ public class TransactionVO {
 	}
 
 	
-	public TransactionVO(String trans_no, String acc_no, String send_bank_cd, int trans_amount, String recieve_bank_cd,
+	public TransactionVO(String trans_no, String acc_no, String send_bank_cd, long trans_amount, String recieve_bank_cd,
 			String reciever, String trans_bal, String trans_memo, Date trans_date, String trans_type) {
 		super();
 		this.trans_no = trans_no;
@@ -61,11 +61,11 @@ public class TransactionVO {
 		this.send_bank_cd = send_bank_cd;
 	}
 
-	public int getTrans_amount() {
+	public long getTrans_amount() {
 		return trans_amount;
 	}
 
-	public void setTrans_amount(int trans_amount) {
+	public void setTrans_amount(long trans_amount) {
 		this.trans_amount = trans_amount;
 	}
 

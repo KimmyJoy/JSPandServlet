@@ -1,9 +1,12 @@
 package biz.account;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import biz.user.UserVO;
+import biz.user.service.UserService;
 import joybank.common.ConnectionFactory;
 import joybank.util.AccountNumUtil;
 
@@ -24,11 +27,12 @@ public class SavingAccountDAO {
 //		sql.append("");
 //		
 //	}
-	
+	private UserService service = UserService.getInstance();
 	
 	 // 계좌를 생성하는 메소드
 	public SavingAccountVO createAccount(SavingAccountVO account) {
 	    SavingAccountVO createdAccount = null;
+	    UserVO user = null;
 	    
 	    while (true) {
 	        String acc_no = AccountNumUtil.generateAccountNumber(account.getBank_cd(), account.getU_id());
@@ -37,8 +41,8 @@ public class SavingAccountDAO {
 	            account.setAcc_no(acc_no);
 	            
 	            StringBuilder sql = new StringBuilder();
-	            sql.append("INSERT INTO Saving_Account (bank_cd, acc_no, u_id, acc_nm, acc_pw, acc_bal, rate) ");
-	            sql.append("VALUES (?, ?, ?, ?, ?, ?, ?)");
+	            sql.append("INSERT INTO Saving_Account (bank_cd, acc_no, u_id, acc_nm, acc_pw, acc_bal, rate, u_email) ");
+	            sql.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 	            
 	            try (
 	            		Connection conn = new ConnectionFactory().getConnection();
@@ -51,6 +55,7 @@ public class SavingAccountDAO {
 	                pstmt.setString(5, account.getAcc_pw());
 	                pstmt.setLong(6, account.getAcc_bal());
 	                pstmt.setDouble(7, account.getRate());
+	                pstmt.setString(8, user.getU_email());
 
 	                pstmt.executeUpdate();
 	                createdAccount = account;  // 계좌 생성이 성공했으므로 반환할 계좌를 설정
@@ -63,7 +68,18 @@ public class SavingAccountDAO {
 
 	    return createdAccount;  // 생성된 계좌를 반환, 실패했을 경우 null 반환
 	}
-
+		
+	
+	//프로시저호출
+	public void transfer(String fromAccount, String toAccount, double amount) throws Exception {
+        String sql = "{ call TRANSFER(?, ?, ?) }";
+        Connection conn = new ConnectionFactory().getConnection();
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setString(1, fromAccount);
+        cs.setString(2, toAccount);
+        cs.setDouble(3, amount);
+        cs.executeUpdate();
+    }
 
     // 계좌 번호가 이미 존재하는지 확인하는 메소드
 //	private boolean isAccountNumberExist(String acc_no) {

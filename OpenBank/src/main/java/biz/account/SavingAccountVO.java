@@ -13,15 +13,16 @@ public class SavingAccountVO {
 	private Date acc_op_date;
 	private double rate;
 	private String acc_stat;
+	private String u_email;
 	
 	
 	public SavingAccountVO() {
-		
+		super();
 	}
 	
 	
 	public SavingAccountVO(String bank_cd, String acc_no, String u_id, String acc_nm, String acc_pw, long acc_bal,
-			Date acc_op_date, double rate, String acc_stat) {
+			Date acc_op_date, double rate, String acc_stat, String u_email) {
 		super();
 		this.bank_cd = bank_cd;
 		this.acc_no = acc_no;
@@ -32,8 +33,8 @@ public class SavingAccountVO {
 		this.acc_op_date = acc_op_date;
 		this.rate = rate;
 		this.acc_stat = acc_stat;
+		this.u_email = u_email;
 	}
-
 
 	public String getAcc_no() {
 		return acc_no;
@@ -98,13 +99,26 @@ public class SavingAccountVO {
 		this.acc_stat = acc_stat;
 	}
 
+	
+
+	public String getU_email() {
+		return u_email;
+	}
+
+
+	public void setU_email(String u_email) {
+		this.u_email = u_email;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "SavingAccountVO [bank_cd=" + bank_cd + ", acc_no=" + acc_no + ", u_id=" + u_id + ", acc_nm=" + acc_nm
 				+ ", acc_pw=" + acc_pw + ", acc_bal=" + acc_bal + ", acc_op_date=" + acc_op_date + ", rate=" + rate
-				+ ", acc_stat=" + acc_stat + "]";
+				+ ", acc_stat=" + acc_stat + ", u_email=" + u_email + "]";
 	}
-	
-	
+
+
+
 }

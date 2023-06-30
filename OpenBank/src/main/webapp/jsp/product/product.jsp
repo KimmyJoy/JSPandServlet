@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<header id="header" class="fixed-top d-flex align-items-center">
+<jsp:include page="../top_menu.jsp"></jsp:include>
+</header>
 	<!-- ======= Pricing Section ======= -->
 		<section id="pricing" class="pricing">
 			<div class="container">

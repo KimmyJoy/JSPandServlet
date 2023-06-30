@@ -28,7 +28,7 @@
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
-	<header>
+	<header id="header" class="fixed-top d-flex align-items-center">
 		<jsp:include page="top_menu.jsp"></jsp:include>
 	</header>
 	<section class="signup-container">

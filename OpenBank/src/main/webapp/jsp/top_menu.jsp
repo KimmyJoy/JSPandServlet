@@ -21,10 +21,9 @@
 
 <!-- Template Main CSS File -->
 <link href="${ pageContext.request.contextPath }/jsp/assets/css/style.css" rel="stylesheet">
-<header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
       <div class="logo">
-        <h1><a href="main.do"><img src="${ pageContext.request.contextPath }/jsp/assets/img/joylogo.png" alt=""></a></h1>
+        <h1><a href="${ pageContext.request.contextPath }/jsp/index.jsp"><img src="${ pageContext.request.contextPath }/jsp/assets/img/logo_bank_230629.png" alt=""></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
@@ -33,37 +32,30 @@
           <li><a class="nav-link scrollto active" href="#testimonials">About</a></li>
           <li><a class="nav-link scrollto" id="createAccountLink"href="#">비대면 계좌 개설</a></li>
           <li class="dropdown">
-          <a href="#"><span>계좌 이체</span> <i class="bi bi-chevron-down"></i></a>
+          <a href="#"><span>계좌 거래</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">게시판</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                </ul>
-              </li>
+              <li><a href="#"><span>계좌 이체</span></a></li>
               <li><a href="#">거래 내역</a></li>
-              <li><a href="#">계좌 이체</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="#">금융상품</a></li>
+          <li><a class="nav-link scrollto" href="/OpenBank/jsp/product/product.jsp">금융상품</a></li>
           <li><a class="nav-link scrollto" href="#">오픈 뱅킹</a></li>
           <li><a class="nav-link scrollto" href="faqpage.jsp">Q & A</a></li>
           <li><a class="nav-link scrollto" href="mypage.do"><c:if test="${loginUser.u_role eq '1' }">마이페이지</c:if></a></li>
           <c:if test="${loginUser.u_role eq '0' }">
           <li class="dropdown">
     		<a href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-     			 <span>관리자페이지</span><i class="bi bi-chevron-down"></i>
+     			 <span id="adminLink" style="cursor: pointer;">관리자페이지</span><i class="bi bi-chevron-down"></i>
    			 </a>
     		<ul class="dropdown-menu" aria-labelledby="adminDropdown">
-      			<li><a class="dropdown-item" href="#">게시판</a></li>
-     			<li><a class="dropdown-item" href="#">거래 내역</a></li>
-      			<li><a class="dropdown-item" href="#">계좌 이체</a></li>
+      			<li><a class="dropdown-item" href="#">문의 관리</a></li>
+     			<li><a class="dropdown-item" href="#">상품 관리</a></li>
+      			<li><a class="dropdown-item" href="#">회원 관리</a></li>
   			 </ul>
  		 </li>
 		</c:if>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <li>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <!-- <form>
               <input type="button" value="로그인" onclick="location.href='loginform.jsp'"> -->
               <c:choose>
@@ -84,7 +76,6 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
     </div>
-  </header><!-- End Header -->
   
   
   
@@ -184,7 +175,6 @@ function validateLoginForm() {
 	  validateLoginForm();
 	});
 </script>
-	
 	<script>
   $(document).ready(function() {
     $('#createAccountLink').on('click', function(e) {
@@ -202,4 +192,10 @@ function validateLoginForm() {
       </c:choose>
     });
   });
+</script>
+<script>
+$('#adminLink').on('click', function() {
+	  window.location.href = '${pageContext.request.contextPath}/jsp/user/adminpage.jsp';
+	});
+
 </script>
