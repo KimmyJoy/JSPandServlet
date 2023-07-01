@@ -171,12 +171,13 @@ function showProductList() {
 // 상품 리스트 데이터를 가져와서 테이블에 추가하는 함수
 function loadProductList() {
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: '/OpenBank/getAllProducts.do',
         success: function (data) {
             var productTable = $("#productTable").find("tbody");
-
+			console.log(data)
             data.forEach(function (product) {
+			console.log(product)
                 var newRow = $("<tr></tr>");
 
                 // 상품 정보를 셀로 추가

@@ -167,6 +167,8 @@ public class ProductDAO {
 	    return productList;
 	}
 
+	
+	
 	//상품 수정용
 	  public void updateProduct(ProductVO product) {
 		    StringBuilder sql = new StringBuilder();
