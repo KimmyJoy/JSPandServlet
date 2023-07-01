@@ -1,5 +1,7 @@
 package biz.product.service;
 
+import java.util.List;
+
 import biz.product.DepositProductVO;
 import biz.product.ProductDAO;
 import biz.product.ProductVO;
@@ -23,6 +25,14 @@ public class ProductService {
 	
 	public boolean addDepositProduct(DepositProductVO product) {
 		return prod.addDepositProduct(product);
+	}
+	
+	public List<ProductVO> getAllProducts(){
+		return prod.getAllProducts();
+	}
+	
+	public void deleteProduct(String p_cd) {
+		prod.deleteProduct(p_cd);
 	}
 	
 }

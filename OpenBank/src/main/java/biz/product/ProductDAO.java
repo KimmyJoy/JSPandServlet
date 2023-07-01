@@ -15,18 +15,20 @@ public class ProductDAO {
 	
 	public void insertDepositProduct(DepositProductVO product) {
         	StringBuilder sql = new StringBuilder();
-        	sql.append(" INSERT INTO product (p_cd, p_nm, p_type, p_rate, p_min_deposit, p_description) ");
-        	sql.append(" VALUES ('PD' || TO_CHAR(product_seq.NEXTVAL), ?, ?, ?, ?, ?) ");	 
+        	sql.append(" INSERT INTO product (p_cd, p_nm, p_type, p_rate, p_min_deposit, p_description, p_d_term) ");
+        	sql.append(" VALUES ('PD' || TO_CHAR(product_seq.NEXTVAL), ?, ?, ?, ?, ?, ?) ");	 
         	//시퀀스에 pd 코드를 지정하기 위함
+       int loc = 1;
         try (
         	 Connection conn = new ConnectionFactory().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
 
-            pstmt.setString(1, product.getP_nm());
-            pstmt.setString(2, product.getP_type());
-            pstmt.setBigDecimal(3, product.getP_rate());
-            pstmt.setBigDecimal(4, product.getMin_deposit());
-            pstmt.setString(5, product.getDescription());
+            pstmt.setString(loc++, product.getP_nm());
+            pstmt.setString(loc++, product.getP_type());
+            pstmt.setBigDecimal(loc++, product.getP_rate());
+            pstmt.setBigDecimal(loc++, product.getMin_deposit());
+            pstmt.setString(loc++, product.getDescription());
+            pstmt.setBigDecimal(loc++, product.getP_d_term());
 
             pstmt.executeUpdate();
 
@@ -91,18 +93,18 @@ public class ProductDAO {
 	public boolean addDepositProduct(DepositProductVO product) {
 	    StringBuilder sql = new StringBuilder();
 	    sql.append("INSERT INTO product (p_cd, p_nm, p_type, p_rate, p_min_deposit, p_description, p_d_term) ");
-	    sql.append("VALUES ('PD' || TO_CHAR(product_seq.NEXTVAL), ?, ?, ?, ?, ?, ?, ?)");
+	    sql.append("VALUES ('PD' || TO_CHAR(product_seq.NEXTVAL), ?, ?, ?, ?, ?, ?)");
 
 	    try (Connection conn = new ConnectionFactory().getConnection();
 	         PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
-	    	
-	    	int loc = 1;
-	        pstmt.setString(loc++, product.getP_nm());
-	        pstmt.setString(loc++, product.getP_type());
-	        pstmt.setBigDecimal(loc++, product.getP_rate());
-	        pstmt.setBigDecimal(loc++, product.getMin_deposit());
-	        pstmt.setString(loc++, product.getDescription());
-	        pstmt.setDate(loc++, product.getP_d_term());
+
+	        pstmt.setString(1, product.getP_nm());
+	        pstmt.setString(2, product.getP_type());
+	        pstmt.setBigDecimal(3, product.getP_rate());
+	        pstmt.setBigDecimal(4, product.getMin_deposit());
+	        pstmt.setString(5, product.getDescription());
+	        pstmt.setBigDecimal(6, product.getP_d_term());
+
 	        int affectedRows = pstmt.executeUpdate();
 	        return affectedRows > 0; // 적어도 한 개 이상의 행이 영향을 받으면 true 반환
 
@@ -146,7 +148,7 @@ public class ProductDAO {
 	            String p_description = rs.getString("p_description");
 	            BigDecimal monthly_deposit = rs.getBigDecimal("monthly_deposit");
 	            Date maturity_date = rs.getDate("maturity_date");
-	            Date p_d_term = rs.getDate("p_d_term");
+	            BigDecimal p_d_term = rs.getBigDecimal("p_d_term");
 	            
 	            ProductVO product;
 	            if ("saving".equals(p_type)) {
@@ -172,18 +174,18 @@ public class ProductDAO {
 		    if (product instanceof SavingProductVO) {
 		        SavingProductVO savingProduct = (SavingProductVO) product;
 		        sql.append("UPDATE product SET p_nm = ?, p_type = ?, p_rate = ?, p_min_deposit = ?, p_description = ?, monthly_deposit = ?, maturity_date = ? WHERE p_cd = ?");
-
+		        int loc = 1;
 		        try (Connection conn = new ConnectionFactory().getConnection();
 		             PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
 
-		            pstmt.setString(1, savingProduct.getP_nm());
-		            pstmt.setString(2, savingProduct.getP_type());
-		            pstmt.setBigDecimal(3, savingProduct.getP_rate());
-		            pstmt.setBigDecimal(4, savingProduct.getMin_deposit());
-		            pstmt.setString(5, savingProduct.getDescription());
-		            pstmt.setBigDecimal(6, savingProduct.getMonthly_deposit());
-		            pstmt.setDate(7, new java.sql.Date(savingProduct.getMaturity_date().getTime()));
-		            pstmt.setString(8, savingProduct.getP_cd());
+		            pstmt.setString(loc++, savingProduct.getP_nm());
+		            pstmt.setString(loc++, savingProduct.getP_type());
+		            pstmt.setBigDecimal(loc++, savingProduct.getP_rate());
+		            pstmt.setBigDecimal(loc++, savingProduct.getMin_deposit());
+		            pstmt.setString(loc++, savingProduct.getDescription());
+		            pstmt.setBigDecimal(loc++, savingProduct.getMonthly_deposit());
+		            pstmt.setDate(loc++, new java.sql.Date(savingProduct.getMaturity_date().getTime()));
+		            pstmt.setString(loc++, savingProduct.getP_cd());
 
 		            pstmt.executeUpdate();
 
@@ -192,18 +194,18 @@ public class ProductDAO {
 		        }
 		    } else if (product instanceof DepositProductVO) {
 		        DepositProductVO depositProduct = (DepositProductVO) product;
-		        sql.append("UPDATE product SET p_nm = ?, p_type = ?, p_rate = ?, p_min_deposit = ?, p_description = ? WHERE p_cd = ?");
-
+		        sql.append("UPDATE product SET p_nm = ?, p_type = ?, p_rate = ?, p_min_deposit = ?, p_description = ?, p_d_term = ? WHERE p_cd = ?");
+		        int loc = 1; 
 		        try (Connection conn = new ConnectionFactory().getConnection();
 		             PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
-
-		            pstmt.setString(1, depositProduct.getP_nm());
-		            pstmt.setString(2, depositProduct.getP_type());
-		            pstmt.setBigDecimal(3, depositProduct.getP_rate());
-		            pstmt.setBigDecimal(4, depositProduct.getMin_deposit());
-		            pstmt.setString(5, depositProduct.getDescription());
-		            pstmt.setString(6, depositProduct.getP_cd());
-
+		        	
+		            pstmt.setString(loc++, depositProduct.getP_nm());
+		            pstmt.setString(loc++, depositProduct.getP_type());
+		            pstmt.setBigDecimal(loc++, depositProduct.getP_rate());
+		            pstmt.setBigDecimal(loc++, depositProduct.getMin_deposit());
+		            pstmt.setString(loc++, depositProduct.getDescription());
+		            pstmt.setString(loc++, depositProduct.getP_cd());
+		            pstmt.setBigDecimal(loc++, depositProduct.getP_d_term());
 		            pstmt.executeUpdate();
 
 		        } catch (Exception e) {

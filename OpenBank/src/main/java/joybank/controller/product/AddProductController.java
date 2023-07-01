@@ -108,7 +108,8 @@ public class AddProductController implements Controller {
         product.setDescription(p_description);
         product.setMonthly_deposit(monthly_deposit);
         product.setMaturity_date(maturity_date);
-
+        
+        System.out.println(product+"saving");
         return product;
     }
 
@@ -122,19 +123,20 @@ public class AddProductController implements Controller {
         String p_min_depositStr = request.getParameter("p_min_deposit");
         String p_description = request.getParameter("p_description");
         String p_d_termStr = request.getParameter("p_d_term");
-        
-        //형변환용 코드
+
+        // 형변환용 코드
         BigDecimal p_rate = new BigDecimal(p_rateStr);
         BigDecimal p_min_deposit = new BigDecimal(p_min_depositStr);
-        Date p_d_term = Date.valueOf(p_d_termStr);
-        
+        BigDecimal p_d_term = new BigDecimal(p_d_termStr);
+
         product.setP_nm(p_nm);
         product.setP_type(p_type);
         product.setP_rate(p_rate);
         product.setMin_deposit(p_min_deposit);
         product.setDescription(p_description);
         product.setP_d_term(p_d_term);
-        
+
+        System.out.println(product + "deposit");
         return product;
     }
 }

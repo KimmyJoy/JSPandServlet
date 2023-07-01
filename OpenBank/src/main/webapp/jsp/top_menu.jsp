@@ -29,6 +29,7 @@
       </div>
       <nav id="navbar" class="navbar">
         <ul>
+        <li><a class="nav-link scrollto" href="#">님 환영합니다</a></li>
           <li><a class="nav-link scrollto active" href="#testimonials">About</a></li>
           <li><a class="nav-link scrollto" id="createAccountLink"href="#">비대면 계좌 개설</a></li>
           <li class="dropdown">
@@ -158,7 +159,7 @@ function validateLoginForm() {
 	    success: function(data) {
 	      if(data.success) {
 	        alert("로그인 성공");
-	        location.href = '/OpenBank/main.do'; // if login is successful, redirect to main page
+	        location.reload()//모달 창 상에서는 ${ loginUser.u_id }를 해도 정보를 모르는 상태여서 팝업에 띄워줄 수가 없다
 	      } else {
 	    	  alert("로그인 실패: " + data.message);
 	      }
@@ -177,25 +178,23 @@ function validateLoginForm() {
 </script>
 	<script>
   $(document).ready(function() {
+    var loggedIn = ${not empty loginUser};
+    var contextPath = '${ pageContext.request.contextPath }';
+    
     $('#createAccountLink').on('click', function(e) {
       e.preventDefault();
       
-      <c:choose>
-        <c:when test="${ not empty loginUser }">
-            // 로그인 상태일 경우 계좌 개설 페이지로 이동
-            location.href = '${ pageContext.request.contextPath }/jsp/account/createaccount.jsp';
-        </c:when>
-        <c:otherwise>
-            // 비로그인 상태일 경우 로그인 모달 팝업
-            $('#myBtn').click();
-        </c:otherwise>
-      </c:choose>
+      if (loggedIn) {
+        // 로그인 상태일 경우 계좌 개설 페이지로 이동
+        location.href = contextPath + '/jsp/account/createaccount.jsp';
+      } else {
+        // 비로그인 상태일 경우 로그인 모달 팝업
+        $('#myBtn').click();
+      }
     });
-  });
-</script>
-<script>
-$('#adminLink').on('click', function() {
-	  window.location.href = '${pageContext.request.contextPath}/jsp/user/adminpage.jsp';
-	});
 
+    $('#adminLink').on('click', function() {
+	  window.location.href = contextPath + '/jsp/user/adminpage.jsp';
+	});
+  });
 </script>

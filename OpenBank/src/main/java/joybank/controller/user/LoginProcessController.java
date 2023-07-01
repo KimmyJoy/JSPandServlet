@@ -44,6 +44,7 @@ public class LoginProcessController implements Controller {
 	        	session.setAttribute("loginUser", user);
 	        	  System.out.println("Adding success to JSON");
 	              jsonObject.put("success", true);
+	              System.out.println(user);
 	              System.out.println("Success added to JSON");
 	        } else {
 	            jsonObject.put("success", false);
@@ -60,11 +61,14 @@ public class LoginProcessController implements Controller {
 			}
 	    }
 
-	    out.print(jsonObject.toString());
-	    out.flush();
-	    out.close();
+//	    out.print(jsonObject.toString());
+	    
+	    System.out.println(jsonObject.toString());
+	    request.setAttribute("jsonObject", jsonObject.toString());
+	  
+	    
 
-	    return "redirect:" + request.getContextPath(); // JSON response를 직접 보내므로 null이어도 된다?
+	    return "/jsp/validateUser.jsp"; // JSON response를 직접 보내므로 null이어도 된다?
 	}
 
 }

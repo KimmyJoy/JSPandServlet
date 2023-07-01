@@ -22,7 +22,7 @@ public class LoginformController implements Controller {
 		UserDAO dao = new UserDAO();
 		UserVO user = dao.getUser(vo);
 		System.out.println(user);
-		
+		System.out.println("loginformcontroller쓰이니?");
 		if(user != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
