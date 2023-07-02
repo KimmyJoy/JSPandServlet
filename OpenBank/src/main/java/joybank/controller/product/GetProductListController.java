@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import biz.product.ProductVO;
 import biz.product.service.ProductService;
 import joybank.controller.Controller;
@@ -16,15 +15,38 @@ public class GetProductListController implements Controller {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-    	List<ProductVO> productList = productService.getAllProducts();
-        
-        request.setAttribute("productList", productList);
-        System.out.println(productList);
-        return "/product.jsp";
+        String type = request.getParameter("type");
+        List<ProductVO> productList;
+
+        if (type != null && type.equals("saving")) {
+            productList = productService.getSavingProducts();
+            request.setAttribute("productList", productList);
+            return "/jsp/product/savingproductList.jsp";
+        } else {
+            productList = productService.getDepositProducts();
+            request.setAttribute("productList", productList);
+            return "/jsp/product/depositproductList.jsp";
+        }
     }
 }
-        /*List<ProductVO> productList = productService.getAllProducts();
+//    public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+//        String type = request.getParameter("type");
+//
+//        if (type != null && type.equals("saving")) {
+//        	List<SavingProductVO> productList;
+//            productList = productService.getSavingProducts();
+//        } else {
+//        	List<DepositProductVO> productList;
+//            productList = productService.getDepositProducts();
+//        }
+//
+//        request.setAttribute("productList", productList);
+//        return "/jsp/user/adminpage.jsp";
+//    }
+//}
 
+        /*List<ProductVO> productList = productService.getAllProducts();
+	json 에바야
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 

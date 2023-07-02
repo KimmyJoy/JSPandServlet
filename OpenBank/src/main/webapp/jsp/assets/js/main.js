@@ -191,9 +191,9 @@ const select = (el, all = false) => {
 //수정
 new Swiper('.testimonials-slider', {
   speed: 600,
-  loop: true,
+  loop: flase,
   autoplay: {
-    delay: 5000,
+    delay: 5000000,
     disableOnInteraction: false
   },
   slidesPerView: 1,

@@ -514,6 +514,7 @@
 						</form>
 					</div>
 
+			
 				</div>
 
 			</div>
@@ -524,7 +525,9 @@
 	
 	
 	<!-- ======= Footer ======= -->
+	<footer>
 	<jsp:include page="footer.jsp"></jsp:include>
+	</footer>
 	<!-- End Footer -->
 
 	<a href="#"

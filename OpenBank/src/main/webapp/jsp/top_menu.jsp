@@ -29,7 +29,7 @@
       </div>
       <nav id="navbar" class="navbar">
         <ul>
-        <li><a class="nav-link scrollto" href="#">님 환영합니다</a></li>
+       <!--  <li><a class="nav-link scrollto" href="#">님 환영합니다</a></li> -->
           <li><a class="nav-link scrollto active" href="#testimonials">About</a></li>
           <li><a class="nav-link scrollto" id="createAccountLink"href="#">비대면 계좌 개설</a></li>
           <li class="dropdown">
@@ -64,9 +64,6 @@
                     <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='/OpenBank/logout.do'">로그아웃</button>
                 </c:when>
                 <c:otherwise>
-					<c:if test="${loginUser.role eq '0' }">
-					<button type="button" class="btn btn-primary me-1" onclick="location.href='/OpenBank/joinuser.do'">회원 등록</button>
-					</c:if>
  					<button type="button" class="btn btn-primary me-1" onclick="location.href='/OpenBank/joinuser.do'">회원 가입</button>
           		  <button type="button" class="btn btn-outline-primary" id="myBtn">로그인</button>
                 </c:otherwise>
@@ -78,7 +75,9 @@
       </nav><!-- .navbar -->
     </div>
   
-  
+  <%-- <c:if test="${loginUser.u_role eq '0' }">
+					<button type="button" class="btn btn-primary me-1" onclick="location.href='/OpenBank/joinuser.do'">회원 등록</button>
+					</c:if> --%>
   
   <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -117,6 +116,7 @@
 	<script src="${ pageContext.request.contextPath }/jsp/assets/js/main.js"></script>
 	
 	<!-- 로그인 모달용 스크립트 -->
+<!-- 로그인 모달용 스크립트 -->
 	<script>
 //특이점: 모달의 경우 팝업 시 중앙에 위치하기 위해서는 css가 script 상에 위치해있어야한다
 // 모달가져오기

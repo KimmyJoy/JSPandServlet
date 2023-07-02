@@ -27,13 +27,16 @@ public class ProductService {
 		return prod.addDepositProduct(product);
 	}
 	
-	public List<ProductVO> getAllProducts(){
-		return prod.getAllProducts();
-	}
-	
+	  public List<ProductVO> getSavingProducts() {
+	        return prod.getAllSavingProducts();
+	    }
+
+	    public List<ProductVO> getDepositProducts() {
+	        return prod.getAllDepositProducts();
+	    }
+
 	public void deleteProduct(String p_cd) {
 		prod.deleteProduct(p_cd);
 	}
-	
 }
 

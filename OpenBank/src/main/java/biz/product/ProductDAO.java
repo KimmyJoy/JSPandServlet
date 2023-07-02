@@ -128,15 +128,16 @@ public class ProductDAO {
 //		}
 //	
 	
-	public List<ProductVO> getAllProducts() {
+	
+	public List<ProductVO> getAllSavingProducts() {
 	    StringBuilder sql = new StringBuilder();
-	    sql.append("SELECT * FROM product");
-	    
-	    List<ProductVO> productList = new ArrayList<>();
+	    sql.append("SELECT * FROM product WHERE p_type = 'saving'");
+
+	    List<ProductVO> savingProductList = new ArrayList<>();
 
 	    try (
-	    	 Connection conn = new ConnectionFactory().getConnection();
-	         PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+	        Connection conn = new ConnectionFactory().getConnection();
+	        PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
 
 	        ResultSet rs = pstmt.executeQuery();
 	        while (rs.next()) {
@@ -148,24 +149,130 @@ public class ProductDAO {
 	            String p_description = rs.getString("p_description");
 	            BigDecimal monthly_deposit = rs.getBigDecimal("monthly_deposit");
 	            Date maturity_date = rs.getDate("maturity_date");
-	            BigDecimal p_d_term = rs.getBigDecimal("p_d_term");
-	            
-	            ProductVO product;
-	            if ("saving".equals(p_type)) {
-	                product = new SavingProductVO(p_cd, p_nm, p_type, p_rate, p_min_deposit, p_description, monthly_deposit, maturity_date);
-	            } else {
-	                product = new DepositProductVO(p_cd, p_nm, p_type, p_rate, p_min_deposit, p_description, p_d_term);
-	            }
-	            
-	            productList.add(product);
+
+	            SavingProductVO savingProduct = new SavingProductVO(p_cd, p_nm, p_type, p_rate, p_min_deposit, p_description, monthly_deposit, maturity_date);
+	            savingProductList.add(savingProduct);
 	        }
 
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
 
-	    return productList;
+	    return savingProductList;
 	}
+	
+	public List<ProductVO> getAllDepositProducts() {
+	    StringBuilder sql = new StringBuilder();
+	    sql.append("SELECT * FROM product WHERE p_type = 'deposit'");
+
+	    List<ProductVO> depositProductList = new ArrayList<>();
+
+	    try (
+	        Connection conn = new ConnectionFactory().getConnection();
+	        PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+
+	        ResultSet rs = pstmt.executeQuery();
+	        while (rs.next()) {
+	            String p_cd = rs.getString("p_cd");
+	            String p_nm = rs.getString("p_nm");
+	            String p_type = rs.getString("p_type");
+	            BigDecimal p_rate = rs.getBigDecimal("p_rate");
+	            BigDecimal p_min_deposit = rs.getBigDecimal("p_min_deposit");
+	            String p_description = rs.getString("p_description");
+	            BigDecimal p_d_term = rs.getBigDecimal("p_d_term");
+
+	            DepositProductVO depositProduct = new DepositProductVO(p_cd, p_nm, p_type, p_rate, p_min_deposit, p_description, p_d_term);
+	            depositProductList.add(depositProduct);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return depositProductList;
+	}
+	
+	
+	/*
+	 * public List<SavingProductVO> getAllSavingProducts() { StringBuilder sql = new
+	 * StringBuilder(); sql.append("SELECT * FROM product WHERE p_type = 'saving'");
+	 * 
+	 * List<SavingProductVO> savingProductList = new ArrayList<>();
+	 * 
+	 * try ( Connection conn = new ConnectionFactory().getConnection();
+	 * PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+	 * 
+	 * ResultSet rs = pstmt.executeQuery(); while (rs.next()) { String p_cd =
+	 * rs.getString("p_cd"); String p_nm = rs.getString("p_nm"); String p_type =
+	 * rs.getString("p_type"); BigDecimal p_rate = rs.getBigDecimal("p_rate");
+	 * BigDecimal p_min_deposit = rs.getBigDecimal("p_min_deposit"); String
+	 * p_description = rs.getString("p_description"); BigDecimal monthly_deposit =
+	 * rs.getBigDecimal("monthly_deposit"); Date maturity_date =
+	 * rs.getDate("maturity_date");
+	 * 
+	 * SavingProductVO savingProduct = new SavingProductVO(p_cd, p_nm, p_type,
+	 * p_rate, p_min_deposit, p_description, monthly_deposit, maturity_date);
+	 * savingProductList.add(savingProduct); }
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); }
+	 * 
+	 * return savingProductList; }
+	 * 
+	 * public List<DepositProductVO> getAllDepositProducts() { StringBuilder sql =
+	 * new StringBuilder();
+	 * sql.append("SELECT * FROM product WHERE p_type = 'deposit'");
+	 * 
+	 * List<DepositProductVO> depositProductList = new ArrayList<>();
+	 * 
+	 * try ( Connection conn = new ConnectionFactory().getConnection();
+	 * PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+	 * 
+	 * ResultSet rs = pstmt.executeQuery(); while (rs.next()) { String p_cd =
+	 * rs.getString("p_cd"); String p_nm = rs.getString("p_nm"); String p_type =
+	 * rs.getString("p_type"); BigDecimal p_rate = rs.getBigDecimal("p_rate");
+	 * BigDecimal p_min_deposit = rs.getBigDecimal("p_min_deposit"); String
+	 * p_description = rs.getString("p_description"); BigDecimal p_d_term =
+	 * rs.getBigDecimal("p_d_term");
+	 * 
+	 * DepositProductVO depositProduct = new DepositProductVO(p_cd, p_nm, p_type,
+	 * p_rate, p_min_deposit, p_description, p_d_term);
+	 * depositProductList.add(depositProduct); }
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); }
+	 * 
+	 * return depositProductList; }
+	 */
+	
+	/*
+	 * public List<ProductVO> getAllProducts() { StringBuilder sql = new
+	 * StringBuilder(); sql.append("SELECT * FROM product");
+	 * 
+	 * List<ProductVO> productList = new ArrayList<>();
+	 * 
+	 * try ( Connection conn = new ConnectionFactory().getConnection();
+	 * PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+	 * 
+	 * ResultSet rs = pstmt.executeQuery(); while (rs.next()) { String p_cd =
+	 * rs.getString("p_cd"); String p_nm = rs.getString("p_nm"); String p_type =
+	 * rs.getString("p_type"); BigDecimal p_rate = rs.getBigDecimal("p_rate");
+	 * BigDecimal p_min_deposit = rs.getBigDecimal("p_min_deposit"); String
+	 * p_description = rs.getString("p_description"); BigDecimal monthly_deposit =
+	 * rs.getBigDecimal("monthly_deposit"); Date maturity_date =
+	 * rs.getDate("maturity_date"); BigDecimal p_d_term =
+	 * rs.getBigDecimal("p_d_term");
+	 * 
+	 * ProductVO product; if ("saving".equals(p_type)) { product = new
+	 * SavingProductVO(p_cd, p_nm, p_type, p_rate, p_min_deposit, p_description,
+	 * monthly_deposit, maturity_date); } else { product = new
+	 * DepositProductVO(p_cd, p_nm, p_type, p_rate, p_min_deposit, p_description,
+	 * p_d_term); }
+	 * 
+	 * productList.add(product); }
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); }
+	 * 
+	 * return productList; }
+	 */
 
 	
 	

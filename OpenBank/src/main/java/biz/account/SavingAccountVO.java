@@ -36,6 +36,7 @@ public class SavingAccountVO {
 		this.u_email = u_email;
 	}
 
+	
 	public String getAcc_no() {
 		return acc_no;
 	}

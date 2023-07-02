@@ -21,7 +21,7 @@ public class AddProductController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         String p_type = request.getParameter("p_type");
-
+        System.out.println("컨트롤러 무사 진입");
         if ("saving".equals(p_type)) {
             SavingProductVO product = createSavingProduct(request);
             boolean success = productService.addSavingProduct(product);
@@ -69,7 +69,7 @@ public class AddProductController implements Controller {
              } catch (Exception e) {
                  e.printStackTrace();
              }
-
+             System.out.println(jsonResponse);
              response.setContentType("application/json");
              response.setCharacterEncoding("UTF-8");
              try (PrintWriter out = response.getWriter()) {

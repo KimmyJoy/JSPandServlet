@@ -25,6 +25,54 @@ public class DepositProductVO extends ProductVO {
 		this.p_d_term = p_d_term;
 	}
 
+	 public String getP_cd() {
+	        return super.getP_cd();
+	    }
+
+	    public void setP_cd(String p_cd) {
+	        super.setP_cd(p_cd);
+	    }
+
+	    public String getP_nm() {
+	        return super.getP_nm();
+	    }
+
+	    public void setP_nm(String p_nm) {
+	        super.setP_nm(p_nm);
+	    }
+
+	    public String getP_type() {
+	        return super.getP_type();
+	    }
+
+	    public void setP_type(String p_type) {
+	        super.setP_type(p_type);
+	    }
+
+	    public BigDecimal getP_rate() {
+	        return super.getP_rate();
+	    }
+
+	    public void setP_rate(BigDecimal p_rate) {
+	        super.setP_rate(p_rate);
+	    }
+
+	    public BigDecimal getP_min_deposit() {
+	        return super.getMin_deposit();
+	    }
+
+	    public void setP_min_deposit(BigDecimal p_min_deposit) {
+	        super.setMin_deposit(p_min_deposit);
+	    }
+
+	    public String getP_description() {
+	        return super.getDescription();
+	    }
+
+	    public void setP_description(String p_description) {
+	        super.setDescription(p_description);
+	    }
+	
 	@Override
 	public String toString() {
 		return "DepositProductVO [p_d_term=" + p_d_term + ", ProductVO=" + super.toString() +"]";
