@@ -188,10 +188,10 @@ const select = (el, all = false) => {
     }
   });
 */
-//수정
+
 new Swiper('.testimonials-slider', {
   speed: 600,
-  loop: flase,
+  loop: true,
   autoplay: {
     delay: 5000000,
     disableOnInteraction: false

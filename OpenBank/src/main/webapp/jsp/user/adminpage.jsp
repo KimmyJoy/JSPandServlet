@@ -24,7 +24,7 @@
 					class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
 					<div class="icon-box" data-aos="fade-up" data-aos-delay="100">
 						<div class="icon">
-							<i class="bx bxl-dribbble"></i>
+							<i class="bi bi-collection"></i>
 						</div>
 						<h4 class="title">
 							<a href="#" onclick="addProduct()">상품 추가</a>
@@ -49,7 +49,7 @@
 					class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
 					<div class="icon-box" data-aos="fade-up" data-aos-delay="300">
 						<div class="icon">
-							<i class="bx bx-tachometer"></i>
+							<i class="bi bi-file-bar-graph"></i>
 						</div>
 						<h4 class="title">
 							<!-- onclick 이벤트를 추가하여 클릭 시 loadProductList 함수가 실행되도록 함 -->
@@ -62,7 +62,7 @@
 					class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
 					<div class="icon-box" data-aos="fade-up" data-aos-delay="400">
 						<div class="icon">
-							<i class="bx bx-world"></i>
+							<i class="bi bi-unlock"></i>
 						</div>
 						<h4 class="title">
 							<a href="${pageContext.request.contextPath}/jsp/account/unfreezaccount.jsp">휴면 계좌 관리</a>
@@ -79,7 +79,7 @@
 	<section>
 		<!-- 숨겨진 상품 등록 view 요소 -->
 		<div id="addProductView" class="hidden" style="display: none;">
-			<form id="addProductForm" action="/addProduct.do" method="POST">
+			<form id="addProductForm" action="/OpenBank/addProduct.do" method="POST">
 				<input type="text" name="p_nm" placeholder="상품명" required>
 				<select name="p_type" required onchange="handleProductTypeChange(this)">
 					<option value="">상품 유형 선택</option>

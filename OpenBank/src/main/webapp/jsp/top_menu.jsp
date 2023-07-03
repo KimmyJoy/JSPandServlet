@@ -29,8 +29,8 @@
       </div>
       <nav id="navbar" class="navbar">
         <ul>
-       <!--  <li><a class="nav-link scrollto" href="#">님 환영합니다</a></li> -->
-          <li><a class="nav-link scrollto active" href="#testimonials">About</a></li>
+         <li><a class="nav-link scrollto" href="#"><p id="welcomeMessage"></p></a></li>
+       <!--    <li><a class="nav-link scrollto active" href="#testimonials">About</a></li> -->
           <li><a class="nav-link scrollto" id="createAccountLink"href="#">비대면 계좌 개설</a></li>
           <li class="dropdown">
           <a href="#"><span>계좌 거래</span> <i class="bi bi-chevron-down"></i></a>
@@ -88,7 +88,7 @@
     <form method="post" action="" name="loginForm">
       <div class="mb-3">
         <label for="id" class="form-label">ID</label> 
-        <input type="text" class="form-control" id="id" name="id" placeholder="대소문자 영문 5자리">
+        <input type="text" class="form-control" id="id" name="id" placeholder="대소문자 영문">
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password</label> 
@@ -99,10 +99,17 @@
   </div>
 </div>
 
-
+<!-- The Modal for Account Creation Alert -->
+<div id="accountAlertModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="closeAccountAlert">&times;</span>
+    <h2>계좌 개설 알림</h2>
+    <p>휴면 계좌를 보유한 상태에서는 계좌 개설이 불가능합니다. 공지사항을 확인해주세요.</p>
+  </div>
+</div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   	<!-- Vendor JS Files -->
 	<script src="${ pageContext.request.contextPath }/jsp/assets/vendor/purecounter/purecounter_vanilla.js"></script>
 	<script src="${ pageContext.request.contextPath }/jsp/assets/vendor/aos/aos.js"></script>
@@ -115,7 +122,6 @@
 	<!-- Template Main JS File -->
 	<script src="${ pageContext.request.contextPath }/jsp/assets/js/main.js"></script>
 	
-	<!-- 로그인 모달용 스크립트 -->
 <!-- 로그인 모달용 스크립트 -->
 	<script>
 //특이점: 모달의 경우 팝업 시 중앙에 위치하기 위해서는 css가 script 상에 위치해있어야한다

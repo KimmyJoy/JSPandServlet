@@ -9,16 +9,16 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
-@font-face {
-    font-family: 'SUIT-Regular';
+/* @font-face {
+    font-family: 'Noto-sans';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
-    font-weight: normal;
+    font-weight: 300;
     font-style: normal;
-}
-/* @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css); */
+} */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css); 
 body {
-  font-family: "SUIT-Regular", sans-serif; 
+  font-family: "Noto-sans", sans-serif; 
   color: #444444;
 }
 
@@ -711,6 +711,11 @@ section {
   transition: all 0.3s ease-in-out;
   border-radius: 8px;
   z-index: 1;
+  width: 300px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .services .icon-box::before {

@@ -78,10 +78,8 @@
 
 						<div class="swiper-slide">
 							<div class="testimonial-wrap">
-								<div class="testimonial-item">
-									<img src="${ pageContext.request.contextPath }/jsp/assets/img/testimonials/testimonials-2.jpg"
-										class="testimonial-img" alt="">
-									<h3>Sara Wilsson</h3>
+								<div class="testimonial-item"  style="background-image:url('${ pageContext.request.contextPath }/jsp/assets/img/testimonials/saving.svg')">
+									<!-- <h3>Sara Wilsson</h3>
 									<h4>Designer</h4>
 									<p>
 										<i class="bx bxs-quote-alt-left quote-icon-left"></i> Export
@@ -89,7 +87,7 @@
 										quem cillum quid cillum eram malis quorum velit fore eram
 										velit sunt aliqua noster fugiat irure amet legam anim culpa. <i
 											class="bx bxs-quote-alt-right quote-icon-right"></i>
-									</p>
+									</p> -->
 								</div>
 							</div>
 						</div>
